@@ -1,12 +1,10 @@
 # About this repo
 
-This repo is used as part of recruitation process for YND DevOps.  
-Every higher level, requires fulfilling all tasks from the previous level.  
-Tasks below shouldn't take more than:
+This is a repository used in YND Technologies recruitment process.
+Based on your experience, take the following tasks and try to accomplish as many as possible.
 
-- Intern 6h
-- Junior 6h
-- Mid 3h
+This should not take more than few hours.
+Good luck!
 
 ## Intern level
 
