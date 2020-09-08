@@ -19,8 +19,9 @@ The expectation is to be able to run `docker-compose up` and have the app runnin
 
 5. Add [Traefik v2](https://containo.us/traefik/) and configure everything to run behind it using lvh.me
 6. Write a basic Jenkinsfile to build and deploy the app using git clone + docker-compose up.
+7. Rewrite dockerfile to NOT use root user.
 
-As an extension of intern level, the person running `docker-compose up` would also have traefik running and should be able to access wordpress via traefik.
+As an extension of intern level, the person running `docker-compose up` would also have traefik running and should be able to access the app via traefik.
 
 ## Mid
 
