@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    image: 'postgres:latest'
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_PASSWORD=$DATABASE_PASSWORD
+      - POSTGRES_USER=$DATABASE_USERNAME
+      - POSTGRES_DB=$DATABASE_NAME
+  blog:
+    links:
+      - db
+    build: .
+    ports:
+      - 3000:3035
+    env_file:
+      - ./.env
+    environment:
+      - PGUSER=$DATABASE_USERNAME
+      - PGHOST=$DATABASE_HOST
+      - PGPASSWORD=$DATABASE_PASSWORD
+      - PGDATABASE=$DATABASE_NAME
+    
