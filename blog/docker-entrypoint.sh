@@ -15,4 +15,3 @@ if [[ "$PROMETHEUS_EXPORTER" == 1 ]]; then
 fi
 
 bundle exec rails s -b 0.0.0.0
-# rails server -b 0.0.0.0
