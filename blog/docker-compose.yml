@@ -1,28 +1,43 @@
 version: '3'
+
 services:
   db:
     image: 'postgres:latest'
-    #env_file:
-     # - .env
+    #env_file: .env
     environment:
-      #- POSTGRES_DB=${DATABASE_NAME} 
-      #- POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      #- POSTGRES_USER=${DATABASE_USERNAME}
-      - POSTGRES_DB=blog_backend
-      - POSTGRES_PASSWORD=blog_backend
-      - POSTGRES_USER=blog_backend
+      - POSTGRES_DB=${DATABASE_NAME} 
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      #- POSTGRES_DB=blog_backend
+      #- POSTGRES_PASSWORD=blog_backend
+      #- POSTGRES_USER=blog_backend
+    labels:
+      - traefik.enable=true
   blog:
     build: .
     ports:
       - '3000:3000'
-    #env_file:
-     # - .env
+    #env_file: .env
     environment:
-      #- PGDATABASE=${DATABASE_NAME} 
-      #- PGPASSWORD=${DATABASE_PASSWORD}
-      #- PGUSER=${DATABASE_USERNAME}
-      #- PGHOST=${DATABASE_HOST}
-      - PGDATABASE=blog_backend
-      - PGPASSWORD=blog_backend
-      - PGUSER=blog_backend
-      - PGHOST=db
+      - PGDATABASE=${DATABASE_NAME} 
+      - PGPASSWORD=${DATABASE_PASSWORD}
+      - PGUSER=${DATABASE_USERNAME}
+      - PGHOST=${DATABASE_HOST}
+      #- PGDATABASE=blog_backend
+      #- PGPASSWORD=blog_backend
+      #- PGUSER=blog_backend
+      #- PGHOST=db
+ 
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.blog.rule=Host("blog.localhost")
+      
+  traefik:
+    image: 'traefik:latest'
+    ports:
+      - '80:80'
+      - '8080:8080'
+      - '443:443'
+    command: --api.insecure=true --providers.docker
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock:ro
