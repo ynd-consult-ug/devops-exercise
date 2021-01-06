@@ -12,7 +12,9 @@ RUN yum install yarn -y
 
 RUN yum install -y nodejs 
 
-RUN npm install
+RUN yarn upgrade @rails/webpacker
+
+#RUN npm install
 
 RUN yum install postgresql-devel -y
 
