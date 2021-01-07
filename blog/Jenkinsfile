@@ -1,4 +1,5 @@
 node {  
+    docker.image('ruby:2.6.3').inside {
     stage('Build') { 
         sh 'docker build -t blog .'
     }
