@@ -6,6 +6,6 @@ node {
         echo 'BBB'
     }
     stage('Deploy') { 
-        echo'111'x
+        echo'111'
     }
 }
