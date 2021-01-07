@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+ db:
+  image: postgres
+#  restart: always
+  env_file:
+   - .env
+  environment:
+   POSTGRES_USER: ${DATABASE_USERNAME}
+   POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+   POSTGRES_DB: ${DATABASE_NAME}
+ 
+ web:
+  build: .
+  volumes:
+   - .:/app
+  labels:
+   - traefik.port=3000
+   - traefik.http.routers.web.rule=Host(`blog.lvh.me`)
+   - traefik.backend.loadbalancer.sticky=true
+  ports:
+   - "3000:3000"
+  depends_on:
+   - db
+
+ traefik:
+  image: "traefik:v2.0.0"
+  command:
+   - --entrypoints.web.address=:80
+   - --providers.docker=true
+   - --api.insecure
+  ports:
+   - "80:80"
+   - "8080:8080"
+  labels:
+   - traefik.http.routers.traefik.rule=Host(`lvh.me`)
+  volumes:
+   - "/var/run/docker.sock:/var/run/docker.sock:ro"

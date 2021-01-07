@@ -1,0 +1,13 @@
+FROM ruby:2.6.3
+
+WORKDIR /app
+
+ENV POSTGRES_USER blog_backend
+ENV POSTGRES_PASSWORD blog_backend
+ENV POSTGRES_DB blog_backend
+
+ADD Gemfile Gemfile.lock /app/
+RUN gem install bundler:2.2.4
+RUN bundle install --path vendor/cache
+
+ADD . /app
