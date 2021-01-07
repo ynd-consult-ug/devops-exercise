@@ -1,5 +1,5 @@
 node {  
-    checkout scm
+ /*   checkout scm
     def testImage = docker.build("blog", "blog/") 
     
     testImage.inside {
@@ -15,4 +15,20 @@ node {
     stage('Deploy') { 
         echo'111'
     } */
+
+    def app
+
+    stage('Clone repository') {
+        checkout scm
+    }
+
+    stage('Build image') {
+        app = docker.build(".")
+    }
+
+    stage('Test image') {
+        app.inside {
+            sh 'echo "Tests passed"'
+        }
+    }
 }
