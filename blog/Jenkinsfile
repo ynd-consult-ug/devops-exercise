@@ -1,12 +1,13 @@
 node {  
     docker.image('ruby:2.6.3').inside {
-    stage('Build') { 
-        sh 'docker build -t blog .'
-    }
-    stage('Test') { 
-        echo 'BBB'
-    }
-    stage('Deploy') { 
-        echo'111'
+        stage('Build') { 
+            sh 'docker build -t blog .'
+        }
+        stage('Test') { 
+           echo 'BBB'
+        }
+       tage('Deploy') { 
+            echo'111'
+        }
     }
 }
