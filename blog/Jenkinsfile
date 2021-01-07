@@ -23,8 +23,8 @@ node {
     }
 
     stage('Build image') {
-        //app = docker.build("blog_pipe")
-        sh 'ls'
+        app = docker.build("blog_pipe", "-f blog/.")
+        //sh 'ls'
     }
 
     stage('Test image') {
