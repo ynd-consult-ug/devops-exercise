@@ -1,8 +1,6 @@
 node {  
     stage('Build') { 
-        sh 'curl -L --fail https://github.com/docker/compose/releases/download/1.27.4/run.sh -o /usr/local/bin/docker-compose'
-        sh 'chmod +x /usr/local/bin/docker-compose'
-        sh '/usr/bin/docker-compose build'
+        sh 'docker build -t blog .'
     }
     stage('Test') { 
         echo 'BBB'
