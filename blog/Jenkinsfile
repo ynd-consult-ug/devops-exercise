@@ -1,6 +1,6 @@
 node {  
     stage('Build') { 
-        echo 'Eee'
+        sh 'docker build -t blog .'
     }
     stage('Test') { 
         echo 'BBB'
