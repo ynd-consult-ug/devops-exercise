@@ -1,0 +1,11 @@
+node {  
+    stage('Build') { 
+        echo 'Eee'
+    }
+    stage('Test') { 
+        echo 'BBB'
+    }
+    stage('Deploy') { 
+        echo'111'x
+    }
+}
