@@ -2,6 +2,7 @@ version: '3'
 
 services:
   db:
+    restart: on-failure
     image: 'postgres:latest'
     #env_file: .env
     environment:
@@ -13,7 +14,9 @@ services:
       #- POSTGRES_USER=blog_backend
     labels:
       - traefik.enable=true
+      
   blog:
+    restart: on-failure
     build: .
     ports:
       - '3000:3000'
@@ -27,12 +30,12 @@ services:
       #- PGPASSWORD=blog_backend
       #- PGUSER=blog_backend
       #- PGHOST=db
- 
     labels:
       - traefik.enable=true
-      - traefik.http.routers.blog.rule=Host("blog.localhost")
+      - traefik.http.routers.blog.rule=Host("lvh.me")
       
   traefik:
+    restart: on-failure
     image: 'traefik:latest'
     ports:
       - '80:80'
