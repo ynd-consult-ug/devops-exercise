@@ -1,6 +1,6 @@
 node {  
     stage('Build') { 
-        sh 'docker-compose build'
+        sh '/usr/bin/docker-compose build'
     }
     stage('Test') { 
         echo 'BBB'
