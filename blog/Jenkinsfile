@@ -7,12 +7,8 @@ pipeline {
                 
                 steps {
                     echo 'Buduje aplikacje blog.'
-                    sh "mkdir Aplikacja"
-                    sh "cd Aplikacja"
                     sh "git clone https://github.com/JakubNajman/devops-exercise"
-                    sh "cd devops-exercise"
-                    sh "cd blog"
-                    sh "docker-compose up --build"
+                    sh "docker-compose up --build -f devops-exercise/blog"
                 }
         }
     }
