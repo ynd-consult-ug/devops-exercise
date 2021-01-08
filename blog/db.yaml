@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  labels:
+    purpose: database
+spec:
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgres:latest
+        env:
+        - name: POSTGRES_PASSWORD
+          value: blog_backend
+        - name: POSTGRES_USER
+          value: blog_backend
+        - name: POSTGRES_DB
+          value: blog_backend
