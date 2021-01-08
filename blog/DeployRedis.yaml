@@ -15,3 +15,6 @@ spec:
       containers:
       - name: redis1
         image: redis:latest
+      containers:
+      - name: post1
+        image: redis:latest
