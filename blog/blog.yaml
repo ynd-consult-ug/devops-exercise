@@ -16,3 +16,14 @@ spec:
       containers:
       - name: blog
         image: unoterr1/blog_pipe:latest
+        env:
+        - name: PGPASSWORD
+          value: blog_backend
+        - name: PGUSER
+          value: blog_backend
+        - name: PGDATABASE
+          value: blog_backend
+        - name: PGHOST
+          value: db
+        ports:
+          - containerPort: 3000

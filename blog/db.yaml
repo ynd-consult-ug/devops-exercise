@@ -16,3 +16,10 @@ spec:
       containers:
       - name: db
         image: postgres:latest
+        env:
+        - name: POSTGRES_PASSWORD
+          value: blog_backend
+        - name: POSTGRES_USER
+          value: blog_backend
+        - name: POSTGRES_DB
+          value: blog_backend
