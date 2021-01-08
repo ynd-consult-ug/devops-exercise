@@ -1,17 +1,5 @@
-node {
-    def app 
-    
-    stage(‘Clone’) {
-        checkout scm
-    }
-    stage(‘Build’) {
-        //app = docker.build(“blog_pipe”, “-f blog/Dockerfile .“)
-        //sh ‘ls’
-        sh "cd blog && docker-compose up --build"
-    }
-    stage(‘Test’) {
-        app.inside {
-            sh "echo Tests passed"
-        }
+node{
+    stage('Echo'){
+        sh 'echo Dziala'
     }
 }
