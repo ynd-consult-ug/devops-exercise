@@ -1,21 +1,4 @@
 node { 
- /*   checkout scm
-    def testImage = docker.build("blog", "blog/") 
-    
-    testImage.inside {
-        sh 'make test'
-    }
-    /*    stage('Build') { 
-        sh 'docker build -t blog .'
-         
-    }
-    stage('Test') { 
-       echo 'BBB'
-    }
-    stage('Deploy') { 
-        echo'111'
-    } */
-
     def app
 
     stage('Checkout code') {
@@ -23,7 +6,7 @@ node {
     }
 
     stage('Build image') {
-        //app = docker.build("blog_pipe", "-f blog/Dockerfile .")
+        app = docker.build("blog_pipe", "-f blog/Dockerfile .")
         //sh 'ls'
         //sh 'cd blog && docker-compose up --build'
     }
@@ -40,7 +23,14 @@ node {
             sh 'echo "Tests passed"'
     //    }
     }
-
+           
+    stage('Push Hub') {
+        docker.withRegistry('https://registry.hub.docker.com', 'hub') {            
+            app.push("${env.BUILD_NUMBER}")            
+            app.push("latest")        
+            }    
+        }
+/*
     stage("Push image") {
         sh 'cd blog && kubectl apply -f DeployKube.yaml'
         sh 'cd blog && kubectl apply -f db.yaml'
