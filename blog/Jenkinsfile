@@ -16,15 +16,16 @@ node {
         echo'111'
     } */
 
-    def app
+//    def app
 
     stage('Clone repository') {
         checkout scm
     }
 
     stage('Build image') {
-        app = docker.build("blog_pipe", "-f blog/Dockerfile .")
+        //app = docker.build("blog_pipe", "-f blog/Dockerfile .")
         //sh 'ls'
+        sh 'docker-compose up --build'
     }
 
     stage('Test image') {
