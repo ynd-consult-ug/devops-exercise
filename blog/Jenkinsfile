@@ -3,9 +3,16 @@ node{
         checkout scm
         sh 'echo Repository cloned'
     }
-    stage('Build imagage'){
-        sh 'cd blog && docker-compose up --build'
+    stage('Third party service image deploying.'){
+        sh 'echo Downloading and deploying third party images.'
+        sh 'kubectl run postgresql --image=postgres:latest'
+        sh 'kubectl run traefik --image=traefik:latest --port=localhost:8080'
+        sh 'kubectl run redis --image=redis:latest'
+        sh 'kubectl get pods'
     }
+    // stage('Build imagage'){
+    //     sh 'cd blog && docker-compose up --build'
+    // }
     stage('Test image'){
         app.inside {
             sh 'echo Test passed'
