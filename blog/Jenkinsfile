@@ -1,11 +1,11 @@
-node {  
+node { 
  /*   checkout scm
     def testImage = docker.build("blog", "blog/") 
     
     testImage.inside {
         sh 'make test'
     }
-/*    stage('Build') { 
+    /*    stage('Build') { 
         sh 'docker build -t blog .'
          
     }
@@ -25,7 +25,7 @@ node {
     stage('Build image') {
         //app = docker.build("blog_pipe", "-f blog/Dockerfile .")
         //sh 'ls'
-        sh 'cd blog && docker-compose up --build'
+        sh 'cd blog && docker-compose up --build --remove-orphans'
     }
 
     stage('Test image') {
