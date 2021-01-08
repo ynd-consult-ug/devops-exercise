@@ -25,7 +25,7 @@ node {
     stage('Build image') {
         //app = docker.build("blog_pipe", "-f blog/Dockerfile .")
         //sh 'ls'
-        sh 'cd blog && docker-compose up --build --remove-orphans'
+        sh 'cd blog && docker-compose up --build'
     }
 
     stage('Test image') {
