@@ -1,0 +1,8 @@
+node() {
+    stage("git") {
+        git 'https://github.com/mparadowsky/devops-exercise'
+    }
+    stage("docker") {
+        sh 'cd blog && docker-compose up --build'
+    }
+}
