@@ -8,6 +8,7 @@ pipeline {
                 steps {
                     echo 'Buduje aplikacje blog.'
                     sh 'cd blog'
+                    sh 'ls'
                     sh "docker-compose up --build"
                 }
         }
