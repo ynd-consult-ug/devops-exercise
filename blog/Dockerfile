@@ -5,7 +5,9 @@ FROM ruby:2.6.3
  RUN apt-get update && apt-get install -y nodejs yarn postgresql-client
 
  RUN ls
- ADD ../Gemfile ../Gemfile.lock /app/
+ RUN cd ../ && ls
+ #Gemfile Gemfile.lock /app/
+ #ADD ../Gemfile ../Gemfile.lock /app/
 
  RUN gem install bundler:2.2.4
  RUN gem install rake:13.0.1
