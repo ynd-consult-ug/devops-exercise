@@ -34,6 +34,8 @@ node {
     stage('Deploy App') {
         sh 'cd blog && kubectl apply -f db.yaml'
         sh 'cd blog && kubectl apply -f blog.yaml'
+ //       sh 'cd blog && kubectl apply -f service_db.yaml'
+ //       sh 'cd blog && kubectl apply -f service_blog.yaml'
     }
 }
 /*
