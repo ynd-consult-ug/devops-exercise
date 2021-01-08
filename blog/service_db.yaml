@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: blog-service
-spec:
+  name: postgresql-service
+spec: 
   selector:
-    app: blog
+    app: db
   ports:
   - protocol: TCP
-    port: 3000
+    port: 5432
     targetPort: 3000
-    nodePort: 30000
-  type: NodePort
+  type: ClusterIP
