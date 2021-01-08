@@ -11,6 +11,7 @@ RUN gem install rake:13.0.1
 
 RUN cd /blog/app
 #RUN bundle install
+RUN ls 
 RUN bundle install
 
 ADD blog/. blog/app
