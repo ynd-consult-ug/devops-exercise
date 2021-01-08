@@ -6,7 +6,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("blog_pipe", "-f blog/Dockerfile .")
+        app = docker.build("unoterr1/blog_pipe", "-f blog/Dockerfile .")
         //sh 'ls'
         //sh 'cd blog && docker-compose up --build'
     }
@@ -25,7 +25,7 @@ node {
     }
            
     stage('Push Hub') {
-        docker.withRegistry('https://registry.hub.docker.com', 'hub') {            
+        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {           
             app.push("${env.BUILD_NUMBER}")            
             app.push("latest")        
             }    
