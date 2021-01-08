@@ -32,29 +32,4 @@ services:
       - traefik.http.routers.blogdash.rule=Host("blog.lvh.me")
       - traefik.http.services.blog.loadbalancer.server.port=3000
       
-  redis:
-    image: 'redis:latest'
-
-  traefik:
-    image: 'traefik:latest'
-    command: 
-      #mozliwosc dostepu do api traefika prosto z entrypointa
-      - --api.insecure=true 
-      #ustawienie dockera jako providera
-      - --providers.docker
-      #umozliwia dostep do dashboarda
-      - --api.dashboard=true
-      #ustawienie loga na poziom debug
-      - --log.level=DEBUG
-    ports:
-      - "8080:8080"
-      - "80:80"
-    volumes:
-      #traefik moze posluchiwac eventy dockera
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels: 
-      - traefik.enable=true
-      - traefik.http.routers.dashboard.rule=Host("traefik.lvh.me")
-      - traefik.http.services.traefik.loadbalancer.server.port=8080
-  
   

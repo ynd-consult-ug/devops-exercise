@@ -11,4 +11,9 @@ RUN yarn upgrade @rails/webpacker
 RUN bundle install
 
 COPY . .
+
+ENV DATABASE_NAME="blog_backend"
+ENV DATABASE_PASSWORD="blog_backend"
+ENV DATABASE_USERNAME="blog_backend"
+
 ENTRYPOINT /app/docker-entrypoint.sh
