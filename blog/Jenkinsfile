@@ -25,7 +25,7 @@ node {
     stage('Build image') {
         //app = docker.build("blog_pipe", "-f blog/Dockerfile .")
         //sh 'ls'
-        sh 'cd blog && docker-compose up --build'
+        //sh 'cd blog && docker-compose up --build'
     }
     
     stage('Deploy 1') {
@@ -39,6 +39,12 @@ node {
         //app.inside {
             sh 'echo "Tests passed"'
     //    }
+    }
+
+    stage("Push image") {
+        sh 'cd blog && kubectl apply -f DeployKube.yaml'
+        sh 'cd blog && kubectl apply -f db.yaml'
+        sh 'echo "Deployed!"'
     }
 
 /*
