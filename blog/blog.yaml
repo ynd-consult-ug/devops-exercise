@@ -1,16 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: blog
   name: blog
+  labels:
+    purpose: blog
 spec:
-  replicas: 1
+  selector:
+    matchLabels:
+      app: blog
   template:
     metadata:
       labels:
         app: blog
     spec:
       containers:
-        - name: blog
-          image: unoterr1/blog_pipe:latest:env
+      - name: blog
+        image: unoterr1/blog_pipe:latest:env
