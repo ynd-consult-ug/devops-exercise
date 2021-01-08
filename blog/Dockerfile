@@ -1,17 +1,14 @@
-FROM ruby:2.6.3
- WORKDIR /app
+FROM yndconsult/docker-ruby:2.6.3-centos7
+WORKDIR "/app"
 
- RUN curl https://deb.nodesource.com/setup_12.x | bash && curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && echo “deb https://dl.yarnpkg.com/debian/ stable main” | tee /etc/apt/sources.list.d/yarn.list
- RUN apt-get update && apt-get install -y nodejs yarn postgresql-client
+RUN curl –sL https://rpm.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 
- #RUN ls
- #RUN cd .. && ls
- #Gemfile Gemfile.lock /app/
- ADD Gemfile Gemfile.lock /app/
+RUN yum install yarn nodejs postgresql-devel bundler -y
+COPY ./yarn.lock Gemfile ./
 
- RUN gem install bundler:2.2.4
- RUN gem install rake:13.0.1
- RUN bundle install
+RUN yarn upgrade @rails/webpacker
+RUN bundle install
 
- ADD . /app
- CMD /app/docker-entrypoint.sh
+COPY . .
+ENTRYPOINT /app/docker-entrypoint.sh
