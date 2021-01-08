@@ -1,13 +1,13 @@
 node {
-    stage(‘Clone repository’) {
+    stage(‘Clone’) {
         checkout scm
     }
-    stage(‘Build image’) {
+    stage(‘Build’) {
         //app = docker.build(“blog_pipe”, “-f blog/Dockerfile .“)
         //sh ‘ls’
         sh ‘cd blog && docker-compose up --build’
     }
-    stage(‘Test image’) {
+    stage(‘Test’) {
         app.inside {
             sh ‘echo “Tests passed”’
         }
