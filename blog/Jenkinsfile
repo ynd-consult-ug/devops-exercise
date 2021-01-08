@@ -16,7 +16,7 @@ node {
         echo'111'
     } */
 
-//    def app
+    def app
 
     stage('Clone repository') {
         checkout scm
