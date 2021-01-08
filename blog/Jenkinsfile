@@ -1,7 +1,7 @@
 node{
     stage('Clone repository'){
         checkout scm
-        sh 'Repository cloned'
+        sh 'echo Repository cloned'
     }
     stage('Build imagage'){
         sh 'cd blog && docker-compose up --build'
