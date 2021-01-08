@@ -11,7 +11,7 @@ RUN gem install rake:13.0.1
 
 #RUN pwd
 
-RUN ls /blog/app 
+RUN ls /blog/app/blog
 # && bundle install
 #RUN bundle install
 #RUN ls 
