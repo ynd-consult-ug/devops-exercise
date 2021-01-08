@@ -30,6 +30,12 @@ node {
             app.push("latest")        
             }    
         }
+
+    stage('Deploy App') {
+        sh 'cd blog && kubectl apply -f db.yaml'
+        sh 'cd blog && kubectl apply -f blog.yaml'
+    }
+}
 /*
     stage("Push image") {
         sh 'cd blog && kubectl apply -f DeployKube.yaml'
@@ -47,7 +53,6 @@ node {
         }
 
     stage('Deploy App') {
-          kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
-        }
+        kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
+    }
 */
-}
