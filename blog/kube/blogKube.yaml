@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-service
+spec:
+  selector:
+    app: blog
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+    nodePort: 30000
+  type: NodePort
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,7 +29,7 @@ spec:
     spec:
       containers:
       - name: blog
-        image: mparadowsky/blog
+        image: mparadowsky/blog:env2
         env:
         - name: PGPASSWORD
           value: blog_backend

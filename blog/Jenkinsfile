@@ -5,10 +5,7 @@ node{
     }
     stage('Third party service image deploying.'){
         sh 'echo Downloading and deploying third party images.'
-        sh 'kubectl run postgresql --image=postgres:latest'
-        sh 'kubectl run traefik --image=traefik:latest --port=8080'
-        sh 'kubectl run redis --image=redis:latest'
-        sh 'kubectl get pods'
+        sh 'kubectl apply -f kube/postgresqlKube.yaml'
     }
     // stage('Build imagage'){
     //     sh 'cd blog && docker-compose up --build'
