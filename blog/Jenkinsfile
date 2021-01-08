@@ -7,7 +7,7 @@ pipeline {
                 
                 steps {
                     echo 'Buduje aplikacje blog.'
-                    sh "docker-compose up --build -f devops-exercise/blog"
+                    sh "docker-compose up --build
                 }
         }
     }
