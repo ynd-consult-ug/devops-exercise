@@ -17,15 +17,15 @@ services:
       
   blog:
     restart: on-failure
-    build: .
+    image: mparadowsky/blog:env
     ports:
       - '3000:3000'
     #env_file: .env
-    environment:
-      - PGDATABASE=${DATABASE_NAME} 
-      - PGPASSWORD=${DATABASE_PASSWORD}
-      - PGUSER=${DATABASE_USERNAME}
-      - PGHOST=${DATABASE_HOST}
+    # environment:
+      # - PGDATABASE=${DATABASE_NAME} 
+      # - PGPASSWORD=${DATABASE_PASSWORD}
+      # - PGUSER=${DATABASE_USERNAME}
+      # - PGHOST=${DATABASE_HOST}
       #- PGDATABASE=blog_backend
       #- PGPASSWORD=blog_backend
       #- PGUSER=blog_backend
