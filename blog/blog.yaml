@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: blog
-        image: unoterr1/blog_pipe:latest
+        image: mparadowsky/blog:env2
         env:
         - name: PGPASSWORD
           value: blog_backend
