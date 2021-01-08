@@ -1,5 +1,5 @@
 FROM yndconsult/docker-ruby:2.6.3-centos7
-WORKDIR "/app"
+WORKDIR "/blog/app"
 
 RUN curl –sL https://rpm.nodesource.com/setup_10.x | bash -
 RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
