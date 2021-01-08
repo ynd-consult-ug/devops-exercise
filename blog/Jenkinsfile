@@ -18,14 +18,20 @@ node {
 
     def app
 
-    stage('Clone repository') {
+    stage('Checkout code') {
         checkout scm
     }
-
+/*
     stage('Build image') {
         //app = docker.build("blog_pipe", "-f blog/Dockerfile .")
         //sh 'ls'
         sh 'cd blog && docker-compose up --build'
+    }
+ */   
+    stage('Deploy 1') {
+        sh 'kubectl run postgresql --image=postgresql:latest'
+        sh 'kubectl run redis --image=redis:latest'
+        sh 'kubectl run traefik --image=traefik:latest'
     }
 
     stage('Test image') {
