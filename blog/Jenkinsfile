@@ -1,16 +1,15 @@
-pipeline {
-    agent none
-
-    stages {
-        stage ('Build') {
-            agent any
-                
-                steps {
-                    echo 'Buduje aplikacje blog.'
-                    sh 'ls'
-                    sh 'cd blog && docker-compose up --build'
-                }
+node {
+    stage(‘Clone repository’) {
+        checkout scm
+    }
+    stage(‘Build image’) {
+        //app = docker.build(“blog_pipe”, “-f blog/Dockerfile .“)
+        //sh ‘ls’
+        sh ‘cd blog && docker-compose up --build’
+    }
+    stage(‘Test image’) {
+        app.inside {
+            sh ‘echo “Tests passed”’
         }
     }
 }
-
