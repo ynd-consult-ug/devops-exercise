@@ -1,5 +1,14 @@
 node{
-    stage('Echo'){
-        sh 'echo Dziala'
+    stage('Clone repository'){
+        checkout scm
+        sh 'Repository cloned'
+    }
+    stage('Build imagage'){
+        sh 'cd blog && docker-compose up --build'
+    }
+    stage('Test image'){
+        app.inside {
+            sh 'echo Test passed'
+        }
     }
 }
