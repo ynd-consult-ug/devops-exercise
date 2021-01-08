@@ -16,6 +16,7 @@ spec:
       containers:
       - name: blog
         image: blog_blog:latest
+        imagePullPolicy: Always
         env:
         - name: PGPASSWORD
           value: blog_backend
