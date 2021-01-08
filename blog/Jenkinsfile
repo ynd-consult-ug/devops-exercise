@@ -29,14 +29,15 @@ node {
     }
  */   
     stage('Deploy 1') {
+        sh 'kubectl delete pods'
         sh 'kubectl run postgresql --image=postgresql:latest'
         sh 'kubectl run redis --image=redis:latest'
         sh 'kubectl run traefik --image=traefik:latest'
     }
 
     stage('Test image') {
-        app.inside {
+        //app.inside {
             sh 'echo "Tests passed"'
-        }
+    //    }
     }
 }
