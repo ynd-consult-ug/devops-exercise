@@ -9,9 +9,9 @@ ADD blog/Gemfile blog/Gemfile.lock blog/app/
 RUN gem install bundler:2.2.4
 RUN gem install rake:13.0.1
 
-#RUN cd blog/app
+RUN cd /blog/app
 #RUN bundle install
-RUN bundle install --path blog/app
+RUN bundle install
 
 ADD blog/. blog/app
 
