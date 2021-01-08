@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp1
+  template:
+    metadata:
+      labels:
+        app: webapp1
+    spec:
+      containers:
+      - name: webapp1
+        image: katacoda/docker-http-server:latest
+        ports:
+        - containerPort: 80
+      
+      - name: webapp1
+        image: katacoda/docker-http-server:latest
+        ports:
+        - containerPort: 80
+      
+      - name: traefik
+        image: 'traefik:latest'
+        ports:
+        - containerPort: 80
+        command: ["/bin/sh","-c"]
+        args: ["--api.insecure=true && --providers.docker && --api.dashboard=true && --log.level=DEBUG"]
+
+
+
+
+
+
+
+
+    ports:
+      - "8080:8080"
+      - "80:80"
+    volumes:
+      #traefik moze posluchiwac eventy dockera
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels: 
+      - traefik.enable=true
+      - traefik.http.routers.dashboard.rule=Host("traefik.lvh.me")
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
