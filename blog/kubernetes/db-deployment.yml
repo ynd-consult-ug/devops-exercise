@@ -16,9 +16,11 @@ spec:
         image: postgres
         env:
           - name: POSTGRES_DB
-            value: blog_backend
+            value: database-service
           - name: POSTGRES_PASSWORD
             value: blog_backend
           - name: POSTGRES_USER
             value: blog_backend
+        ports:
+          - containerPort: 5432
         

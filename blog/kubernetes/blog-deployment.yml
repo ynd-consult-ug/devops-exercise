@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend2
+spec:
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - name: blog
+        image: mparadowsky/blog:env2
+        env:
+          - name: PGHOST
+            value: database-service
+          - name: PGDATABASE
+            value: blog_backend
+          - name: PGPASSWORD
+            value: blog_backend
+          - name: PGUSER
+            value: blog_backend
+        ports:
+          - containerPort: 3000
