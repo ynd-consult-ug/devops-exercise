@@ -17,10 +17,10 @@ node {
     //    }
     }
 
- /*         
+/*         
     stage('Push Hub') {
         docker.withRegistry('https://registry.hub.docker.com/', 'hub') {           
-//            app.push("${env.BUILD_NUMBER}")            
+            app.push("${env.BUILD_NUMBER}")            
             app.push("latest")        
             }    
         }
@@ -28,30 +28,15 @@ node {
 
     stage('Deploy App') {
  //       sh 'cd blog && kubectl apply -f db.yaml'
- 
  //       sh 'minikube start'
         sh 'eval $(minikube docker-env)'
-        sh 'cd blog && kubectl apply -f blog.yaml'
-        
+        sh 'cd blog && kubectl apply -f blog.yaml'      
  //       sh 'cd blog && kubectl apply -f service_db.yaml'
  //       sh 'cd blog && kubectl apply -f service_blog.yaml'
     }
 }
-/*
-    stage("Push image") {
-        sh 'cd blog && kubectl apply -f DeployKube.yaml'
-        sh 'cd blog && kubectl apply -f db.yaml'
-        sh 'echo "Deployed!"'
-    }
 
 /*
-    stage("Push image") {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            myapp.push("latest")
-   //                         myapp.push("${env.BUILD_ID}")
-                    }
-        }
 
     stage('Deploy App') {
         kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
