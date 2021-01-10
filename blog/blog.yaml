@@ -26,6 +26,6 @@ spec:
           value: blog_backend
         - name: PGHOST
 #          value: localhost
-          value: postgresql-service:33333
+          value: postgresql-service:30003
         ports:
           - containerPort: 3000
