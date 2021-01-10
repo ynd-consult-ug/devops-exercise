@@ -3,16 +3,22 @@ node{
         checkout scm
         sh 'echo Repository cloned'
     }
-    stage('Third party service image deploying.'){
-        sh 'echo Downloading and deploying third party images.'
-        sh 'kubectl apply -f kube/postgresqlKube.yaml'
+    stage('Building app.'){
+        app = docker.build("jakubnajman/blog","-f blog/Dockerfile .")
+        sh 'echo App builded.'
     }
-    // stage('Build imagage'){
-    //     sh 'cd blog && docker-compose up --build'
-    // }
     stage('Test image'){
         app.inside {
-            sh 'echo Test passed'
+            sh 'echo Test passed.'
         }
+    }
+    stage('Deploying on Kubernetes'){
+        sh 'minikube start'
+        sh 'cd blog && kubectl apply -f kube/'
+        sh 'echo Deployments and services aplied.'
+    }
+    stage('Starting services'){
+        sh 'minikube service postgreqsl-service'
+        sh 'minikube service blog-service'
     }
 }

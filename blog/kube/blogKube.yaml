@@ -9,7 +9,6 @@ spec:
   - protocol: TCP
     port: 3000
     targetPort: 3000
-    nodePort: 30000
   type: NodePort
 ---
 apiVersion: apps/v1
@@ -29,7 +28,8 @@ spec:
     spec:
       containers:
       - name: blog
-        image: mparadowsky/blog:env2
+        image: jakubnajman/blog
+        imagePullPolicy: never
         env:
         - name: PGPASSWORD
           value: blog_backend
@@ -38,6 +38,6 @@ spec:
         - name: PGDATABASE
           value: blog_backend
         - name: PGHOST
-          value: db
+          value: postgresql-service.default.svc.cluster.local
         ports:
           - containerPort: 3000

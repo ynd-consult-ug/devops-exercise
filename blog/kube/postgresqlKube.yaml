@@ -8,8 +8,7 @@ spec:
   ports:
   - protocol: TCP
     port: 5432
-    targetPort: 3000
-  type: ClusterIP
+  type: NodePort
 
 ---
 apiVersion: apps/v1
