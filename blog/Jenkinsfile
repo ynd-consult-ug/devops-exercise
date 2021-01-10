@@ -17,8 +17,8 @@ node{
         sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
     }
-    stage('Starting services'){
-        sh 'minikube service postgresql-service'
-        sh 'minikube service blog-service'
-    }
+    // stage('Starting services'){
+    //     sh 'minikube service postgresql-service &'
+    //     sh 'minikube service blog-service &'
+    // }
 }
