@@ -11,7 +11,7 @@ RUN yarn upgrade @rails/webpacker
 RUN bundle install
 
 #COPY . .
-COPY . /app
+COPY /blog/. /blog/app
 
 ENV DATABASE_NAME="blog_backend"
 ENV DATABASE_PASSWORD="blog_backend"
