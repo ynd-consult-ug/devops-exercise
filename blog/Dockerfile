@@ -13,9 +13,9 @@ RUN bundle install
 #COPY . .
 COPY /blog/. /blog/app
 
-ENV DATABASE_NAME="blog_backend"
-ENV DATABASE_PASSWORD="blog_backend"
-ENV DATABASE_USERNAME="blog_backend"
-ENV DATABASE_HOST="postgres-service.default"
+#ENV DATABASE_NAME="blog_backend"
+#ENV DATABASE_PASSWORD="blog_backend"
+#ENV DATABASE_USERNAME="blog_backend"
+#ENV DATABASE_HOST="localhost"
 
 ENTRYPOINT /blog/app/docker-entrypoint.sh
