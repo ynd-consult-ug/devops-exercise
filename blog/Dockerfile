@@ -10,10 +10,12 @@ COPY ./blog/yarn.lock /blog/Gemfile ./
 RUN yarn upgrade @rails/webpacker
 RUN bundle install
 
-COPY . .
+#COPY . .
+COPY /blog/. /blog/app
 
 ENV DATABASE_NAME="blog_backend"
 ENV DATABASE_PASSWORD="blog_backend"
 ENV DATABASE_USERNAME="blog_backend"
+ENV DATABASE_HOST="postgres-service.default"
 
 ENTRYPOINT /blog/app/docker-entrypoint.sh
