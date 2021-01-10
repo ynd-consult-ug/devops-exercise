@@ -1,7 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend2
+  name: blog
+  labels:
+    app: blog
 spec:
   selector:
     matchLabels:
@@ -13,10 +15,12 @@ spec:
     spec:
       containers:
       - name: blog
-        image: mparadowsky/blog:env2
+        image: mparadowsky/blog:latest
         env:
           - name: PGHOST
-            value: database-service
+            value: db 
+          - name: PGHOSTADDR
+            value: 10.97.135.163
           - name: PGDATABASE
             value: blog_backend
           - name: PGPASSWORD

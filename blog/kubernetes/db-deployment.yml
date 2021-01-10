@@ -1,7 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: database
+  labels:
+    app: db
 spec:
   selector:
     matchLabels:
@@ -16,11 +18,13 @@ spec:
         image: postgres
         env:
           - name: POSTGRES_DB
-            value: database-service
+            value: blog_backend
           - name: POSTGRES_PASSWORD
             value: blog_backend
           - name: POSTGRES_USER
             value: blog_backend
         ports:
           - containerPort: 5432
+    
+
         
