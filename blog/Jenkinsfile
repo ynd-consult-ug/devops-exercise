@@ -10,24 +10,21 @@ node {
         //sh 'ls'
         //sh 'cd blog && docker-compose up --build'
     }
-    
-    stage('Deploy 1') {
-      //  sh 'kubectl delete pods postgresql
-      //  sh 'kubectl run postgresql --image=postgresql:latest'
-    }
 
     stage('Test image') {
         //app.inside {
             sh 'echo "Tests passed"'
     //    }
     }
-           
+
+ /*          
     stage('Push Hub') {
         docker.withRegistry('https://registry.hub.docker.com/', 'hub') {           
 //            app.push("${env.BUILD_NUMBER}")            
             app.push("latest")        
             }    
         }
+*/
 
     stage('Deploy App') {
  //       sh 'cd blog && kubectl apply -f db.yaml'
