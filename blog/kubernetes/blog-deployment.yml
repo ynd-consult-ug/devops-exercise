@@ -15,12 +15,10 @@ spec:
     spec:
       containers:
       - name: blog
-        image: 090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog
+        image: 090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog:latest
         env:
           - name: PGHOST
-            value: db 
-          - name: PGHOSTADDR
-            value: 10.97.135.163
+            value: database-service.default.svc.cluster.local
           - name: PGDATABASE
             value: blog_backend
           - name: PGPASSWORD

@@ -7,7 +7,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db #<%= BlogBackend.config.postgres.host %>
+  host: <%= BlogBackend.config.postgres.host %>
   username: <%= BlogBackend.config.postgres.username %>
   password: <%= BlogBackend.config.postgres.password %>
   database: <%= BlogBackend.config.postgres.database %>
