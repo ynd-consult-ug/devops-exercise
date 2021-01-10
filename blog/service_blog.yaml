@@ -11,13 +11,3 @@ spec:
     targetPort: 3000
     #nodePort: 30000
   type: NodePort
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: blog-service
-subsets:
-  - addresses:
-      - ip: lvh.me
-    ports:
-      - port: 3000
