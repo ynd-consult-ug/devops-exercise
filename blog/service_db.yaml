@@ -8,5 +8,6 @@ spec:
   ports:
   - protocol: TCP
     port: 5432
-    targetPort: 3000
-  type: ClusterIP
+    targetPort: 5432
+#  type: ClusterIP
+  type: NodePort
