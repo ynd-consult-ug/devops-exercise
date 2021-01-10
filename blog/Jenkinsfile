@@ -17,21 +17,21 @@ node {
     //    }
     }
 
- /*          
+          
     stage('Push Hub') {
         docker.withRegistry('https://registry.hub.docker.com/', 'hub') {           
 //            app.push("${env.BUILD_NUMBER}")            
             app.push("latest")        
             }    
         }
-*/
+
 
     stage('Deploy App') {
  //       sh 'cd blog && kubectl apply -f db.yaml'
  
  //       sh 'eval $(minikube docker-env)'
 
-        sh 'cd blog && kubectl apply -f blog.yaml'
+ //       sh 'cd blog && kubectl apply -f blog.yaml'
         
  //       sh 'cd blog && kubectl apply -f service_db.yaml'
  //       sh 'cd blog && kubectl apply -f service_blog.yaml'
