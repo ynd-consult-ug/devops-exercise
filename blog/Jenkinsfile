@@ -18,7 +18,7 @@ node{
         sh 'echo Deployments and services aplied.'
     }
     stage('Starting services'){
-        sh 'minikube service postgreqsl-service'
+        sh 'minikube service postgresql-service'
         sh 'minikube service blog-service'
     }
 }
