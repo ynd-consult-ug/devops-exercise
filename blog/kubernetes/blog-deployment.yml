@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: blog
-        image: mparadowsky/blog:latest
+        image: 090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog
         env:
           - name: PGHOST
             value: db 
