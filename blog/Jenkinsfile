@@ -8,9 +8,9 @@ node{
         sh 'echo App builded.'
     }
     stage('Test image'){
-        app.inside {
+        //app.inside {
             sh 'echo Test passed.'
-        }
+        //}
     }
     stage('Deploying on Kubernetes'){
         sh 'minikube start'
