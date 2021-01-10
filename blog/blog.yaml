@@ -25,7 +25,7 @@ spec:
         - name: PGDATABASE
           value: blog_backend
         - name: PGHOST
-          value: localhost:59460
+          value: postgresql-service.default.svc.cluster.local
 #          value: postgresql-service:30003
         ports:
           - containerPort: 3000
