@@ -12,10 +12,8 @@ node {
     }
     
     stage('Deploy 1') {
-      //  sh 'kubectl delete pods postgresql redis traefik lol'
+      //  sh 'kubectl delete pods postgresql
       //  sh 'kubectl run postgresql --image=postgresql:latest'
-      //  sh 'kubectl run redis --image=redis:latest'
-      //  sh 'kubectl run traefik --image=traefik:latest'
     }
 
     stage('Test image') {
@@ -32,8 +30,12 @@ node {
         }
 
     stage('Deploy App') {
-        sh 'cd blog && kubectl apply -f db.yaml'
- //       sh 'cd blog && kubectl apply -f blog.yaml'
+ //       sh 'cd blog && kubectl apply -f db.yaml'
+ 
+ //       sh 'eval $(minikube docker-env)'
+
+        sh 'cd blog && kubectl apply -f blog.yaml'
+        
  //       sh 'cd blog && kubectl apply -f service_db.yaml'
  //       sh 'cd blog && kubectl apply -f service_blog.yaml'
     }
