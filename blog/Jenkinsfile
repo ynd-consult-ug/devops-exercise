@@ -4,11 +4,10 @@ node() {
         git 'https://github.com/mparadowsky/devops-exercise'
     }
     stage("Building image") {
-        sh 'mv ./blog/.env.example .env'
         myImage = docker.build("mparadowsky/blog", "./blog")
     }
     stage("Pushing image to docker hub") {
-        myImage.push("latest")
+        myImage.push("")
     }
      stage("Clearing pods and deployments") {
         sh 'kubectl delete deployment/blog'
