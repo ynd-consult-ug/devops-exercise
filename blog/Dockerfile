@@ -11,6 +11,7 @@ COPY yarn.lock Gemfile* ./
 
 RUN yarn upgrade @rails/webpacker
 RUN bundle install
+
 ENV DATABASE_HOST=database-service.default.svc.cluster.local
 
 COPY . .
