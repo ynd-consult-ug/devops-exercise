@@ -18,14 +18,37 @@ spec:
         image: unoterr1/blog_pipe:latest
         imagePullPolicy: Never
         env:
-        - name: PGPASSWORD
-          value: blog_backend
-        - name: PGUSER
-          value: blog_backend
-        - name: PGDATABASE
-          value: blog_backend
-        - name: PGHOST
-          value: postgresql-service.default.svc.cluster.local
-#          value: postgresql-service:30003
+          name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: PGUSER
+
+          name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: PGPASSWORD
+
+          name: PGDATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: PGDATABASE
+
+          name: PGHOST
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: PGUSER
+
+#        - name: PGPASSWORD
+#          value: blog_backend
+#       - name: PGUSER
+#          value: blog_backend
+#        - name: PGDATABASE
+#          value: blog_backend
+#        - name: PGHOST
+#          value: postgresql-service.default.svc.cluster.local
         ports:
           - containerPort: 3000

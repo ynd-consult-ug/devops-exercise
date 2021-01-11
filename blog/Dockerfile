@@ -13,6 +13,6 @@ RUN bundle install
 #COPY . .
 COPY /blog/. /blog/app
 
-ENV DATABASE_HOST="postgresql-service.default.svc.cluster.local"
+#ENV DATABASE_HOST="postgresql-service.default.svc.cluster.local"
 
 ENTRYPOINT /blog/app/docker-entrypoint.sh
