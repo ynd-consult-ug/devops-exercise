@@ -37,5 +37,10 @@ spec:
               secretKeyRef:
                 name: dbsecrets
                 key: DATABASE_USERNAME
+          - name: REDIS_URI
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: REDIS_URI
         ports:
           - containerPort: 3000
