@@ -13,6 +13,7 @@ RUN yarn upgrade @rails/webpacker
 RUN bundle install
 
 ENV DATABASE_HOST=database-service.default.svc.cluster.local
+ENV REDIS_URI=redis://redis:6379/0r
 
 COPY . .
 CMD /app/docker-entrypoint.sh
