@@ -18,30 +18,26 @@ spec:
         image: unoterr1/blog_pipe:latest
         imagePullPolicy: Never
         env:
-          name: PGUSER
-          valueFrom:
+        -  name: PGUSER
+           valueFrom:
             secretKeyRef:
               name: mysecret
               key: PGUSER
-
-          name: PGPASSWORD
-          valueFrom:
+        -  name: PGPASSWORD
+           valueFrom:
             secretKeyRef:
               name: mysecret
               key: PGPASSWORD
-
-          name: PGDATABASE
-          valueFrom:
+        -  name: PGDATABASE
+           valueFrom:
             secretKeyRef:
               name: mysecret
               key: PGDATABASE
-
-          name: PGHOST
-          valueFrom:
+        -  name: PGHOST
+           valueFrom:
             secretKeyRef:
               name: mysecret
-              key: PGUSER
-
+              key: PGHOST
 #        - name: PGPASSWORD
 #          value: blog_backend
 #       - name: PGUSER
