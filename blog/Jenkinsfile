@@ -7,7 +7,7 @@ node() {
         myImage = docker.build("mparadowsky/blog", "./blog")
     }
     stage("Pushing image to docker hub") {
-        myImage.push("")
+        myImage.push("latest")
     }
      stage("Clearing pods and deployments") {
         sh 'kubectl delete deployment/blog'
@@ -16,5 +16,7 @@ node() {
     stage("Launching new deployments") {
         sh 'kubectl apply -f blog/kubernetes'
     }
-    
+    stage("Opening service") {
+        sh 'minikube service blog-svc'
+    }
 }
