@@ -22,7 +22,7 @@ node {
 
     stage('Push Hub') {
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
-        docker.withRegistry('localhost:55001/') {        
+        docker.withRegistry('http://localhost:55001/') {        
             app.push("${env.BUILD_NUMBER}")            
             app.push("latest")        
             }    
