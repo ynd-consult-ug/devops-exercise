@@ -8,9 +8,8 @@ node{
         sh 'echo App builded.'
     }
     stage('Pushing to Azure registry'){
-        docker.withRegistry('azure') {
-            app.push("latest")
-        }
+        sh 'docker tag jakubnajman/blog_app yndblog.azurecr.io/blog_app'
+        sh 'docker push yndblog.azurecr.io/blog_app'
     }
     // stage('Pulling on Minikube Docker.'){
     //     sh 'minikube ssh'
