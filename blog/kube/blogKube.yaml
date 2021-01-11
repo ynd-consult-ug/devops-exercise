@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: blog
-        image: app/blog:latest
+        image: app/blog
         imagePullPolicy: Never
         env:
         - name: PGPASSWORD
