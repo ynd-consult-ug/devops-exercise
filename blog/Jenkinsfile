@@ -10,6 +10,7 @@ node() {
         myImage.push("latest")
     }
      stage("Clearing pods and deployments") {
+        sh 'kubectl apply -f blog/kubernetes'
         sh 'kubectl delete deployment/blog'
         sh 'kubectl delete deployment/database'
     }
