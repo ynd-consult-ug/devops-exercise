@@ -33,22 +33,22 @@ spec:
         - name: POSTGRES_PASSWORD
           valueFrom: 
             secretKeyRef:
-              name: dbSecret
+              name: dbsecret
               key: DATABASE_PASSWORD
         - name: POSTGRES_USER
           valueFrom: 
             secretKeyRef:
-              name: dbSecret
+              name: dbsecret
               key: DATABASE_USERNAME
         - name: POSTGRES_DB
           valueFrom: 
             secretKeyRef:
-              name: dbSecret
+              name: dbsecret
               key: DATABASE_NAME
         - name: PGHOST
           valueFrom: 
             secretKeyRef:
-              name: dbSecret
+              name: dbsecret
               key: DATABASE_HOST
         ports:
           - containerPort: 3000
