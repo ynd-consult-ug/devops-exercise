@@ -4,9 +4,13 @@ node{
         sh 'echo Repository cloned'
     }
     stage('Building app.'){
-        sh 'eval $(minikube docker-env)'
-        app = docker.build("app/blog","-f blog/Dockerfile .")
+        app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         sh 'echo App builded.'
+    }
+    stage('Pushing to hub'){
+        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {
+            app.push("latest")
+        }
     }
     stage('Test image'){
         //app.inside {
@@ -14,9 +18,7 @@ node{
         //}
     }
     stage('Deploying on Kubernetes'){
-        sh 'minikube start'
-        
-        // sh 'eval $(minikube docker-env)'
+        sh 'eval $(minikube docker-env)'
         sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
     }
