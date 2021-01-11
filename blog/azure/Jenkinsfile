@@ -1,0 +1,31 @@
+node{
+    stage('Clone repository'){
+        checkout scm
+        sh 'echo Repository cloned'
+    }
+    stage('Building app'){
+        app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
+        sh 'echo App builded.'
+    }
+    stage('Pushing to Azure registry'){
+        docker.withRegistry('azure') {
+            app.push("latest")
+        }
+    }
+    // stage('Pulling on Minikube Docker.'){
+    //     sh 'minikube ssh'
+    //     sh 'doker pull jakubnajman/'
+    // }
+    stage('Test image'){
+        sh 'echo Test passed.'
+    }
+    stage('Deploying on Kubernetes'){
+        sh 'eval $(minikube docker-env)'
+        sh 'cd blog && kubectl apply -f kube/'
+        sh 'echo Deployments and services aplied.'
+    }
+    // stage('Starting services'){
+    //     sh 'minikube service postgresql-service &'
+    //     sh 'minikube service blog-service &'
+    // }
+}

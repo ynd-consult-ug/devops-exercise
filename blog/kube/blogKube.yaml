@@ -28,7 +28,8 @@ spec:
     spec:
       containers:
       - name: blog
-        image: localhost:5000/blog_app
+        # image: localhost:5000/blog_app
+        image: yndblog.azurecr.io/blog_app
         env:
         - name: DATABASE_PASSWORD
           valueFrom: 
