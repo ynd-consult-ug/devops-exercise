@@ -18,11 +18,20 @@ spec:
         image: postgres
         env:
           - name: POSTGRES_DB
-            value: blog_backend
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: POSTGRES_DB
           - name: POSTGRES_PASSWORD
-            value: blog_backend
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: POSTGRES_PASSWORD
           - name: POSTGRES_USER
-            value: blog_backend
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: POSTGRES_USER
         ports:
           - containerPort: 5432
     

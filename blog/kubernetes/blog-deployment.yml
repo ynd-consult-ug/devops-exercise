@@ -18,12 +18,24 @@ spec:
         image: mparadowsky/blog
         env:
           - name: PGHOST
-            value: database-service.default.svc.cluster.local
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: PGHOST
           - name: PGDATABASE
-            value: blog_backend
-          - name: PGPASSWORD
-            value: blog_backend
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: PGHOST
+          - name: PGDATABASE
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: PGPASSWORD
           - name: PGUSER
-            value: blog_backend
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: PGUSER
         ports:
           - containerPort: 3000
