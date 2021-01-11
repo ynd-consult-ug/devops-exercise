@@ -16,7 +16,8 @@ node {
             sh 'echo "Tests passed"'
     }
 
-/*  This section was used to push created image to dockerhub but now it is done without it
+
+//  This section was used to push created image to dockerhub but now it is done without it
 //  using imagePullPolicy: Never in blog.yaml 
 
     stage('Push Hub') {
@@ -25,7 +26,7 @@ node {
             app.push("latest")        
             }    
         }
-*/
+
 
     stage('Deploy App') {
 

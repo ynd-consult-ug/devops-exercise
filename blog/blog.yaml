@@ -16,7 +16,7 @@ spec:
       containers:
       - name: blog
         image: unoterr1/blog_pipe:latest
-        imagePullPolicy: Never
+#        imagePullPolicy: Never
         env:
         -  name: PGUSER
            valueFrom:
