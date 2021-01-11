@@ -17,17 +17,17 @@ spec:
       - name: db
         image: postgres:latest
         env:
-        -  name: DATABASE_USERNAME
+        -  name: POSTGRES_USER
            valueFrom:
             secretKeyRef:
               name: mysecret
               key: DATABASE_USERNAME
-        -  name: DATABASE_PASSWORD
+        -  name: POSTGRES_PASSWORD
            valueFrom:
             secretKeyRef:
               name: mysecret
               key: DATABASE_PASSWORD
-        -  name: DATABASE_NAME
+        -  name: POSTGRES_DB
            valueFrom:
             secretKeyRef:
               name: mysecret
