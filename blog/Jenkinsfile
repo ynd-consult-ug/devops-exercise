@@ -15,6 +15,7 @@ node{
     }
     stage('Deploying on Kubernetes'){
         sh 'minikube start'
+        
         // sh 'eval $(minikube docker-env)'
         sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
