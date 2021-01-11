@@ -18,25 +18,25 @@ spec:
         image: unoterr1/blog_pipe:latest
 #        imagePullPolicy: Never
         env:
-        -  name: PGUSER
+        -  name: DATABASE_USERNAME
            valueFrom:
             secretKeyRef:
               name: mysecret
-              key: PGUSER
-        -  name: PGPASSWORD
+              key: DATABASE_USERNAME
+        -  name: DATABASE_PASSWORD
            valueFrom:
             secretKeyRef:
               name: mysecret
-              key: PGPASSWORD
-        -  name: PGDATABASE
+              key: DATABASE_PASSWORD
+        -  name: DATABASE_NAME
            valueFrom:
             secretKeyRef:
               name: mysecret
-              key: PGDATABASE
-        -  name: PGHOST
+              key: DATABASE_NAME
+        -  name: DATABASE_HOST
            valueFrom:
             secretKeyRef:
               name: mysecret
-              key: PGHOST
+              key: DATABASE_HOST
         ports:
           - containerPort: 3000
