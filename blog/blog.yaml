@@ -17,7 +17,7 @@ spec:
       - name: blog
 #        image: unoterr1/blog_pipe:latest
 #        imagePullPolicy: Never
-        image: localhot:5000/unoterr1/blog_pipe:latest
+        image: localhost:5000/unoterr1/blog_pipe:latest
         env:
         -  name: DATABASE_USERNAME
            valueFrom:
