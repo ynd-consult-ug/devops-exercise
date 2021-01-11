@@ -17,22 +17,22 @@ spec:
       - name: blog
         image: mparadowsky/blog
         env:
-          - name: PGHOST
+          - name: DATABASE_HOST
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
                 key: DATABASE_HOST
-          - name: PGDATABASE
+          - name: DATABASE_NAME
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
                 key: DATABASE_NAME
-          - name: PGPASSWORD
+          - name: DATABASE_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
                 key: DATABASE_PASSWORD
-          - name: PGUSER
+          - name: DATABASE_USERNAME
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
