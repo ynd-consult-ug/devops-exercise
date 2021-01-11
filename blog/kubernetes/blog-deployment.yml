@@ -21,21 +21,21 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
-                key: PGHOST
+                key: DATABASE_HOST
           - name: PGDATABASE
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
-                key: PGHOST
-          - name: PGDATABASE
+                key: DATABASE_NAME
+          - name: PGPASSWORD
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
-                key: PGPASSWORD
+                key: DATABASE_PASSWORD
           - name: PGUSER
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
-                key: PGUSER
+                key: DATABASE_USERNAME
         ports:
           - containerPort: 3000
