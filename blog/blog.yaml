@@ -15,8 +15,6 @@ spec:
     spec:
       containers:
       - name: blog
-#        image: mparadowsky/blog:env2
-#        image: unoterr1/blog_pipe:latest
         image: unoterr1/blog_pipe:latest
         imagePullPolicy: Never
         env:
