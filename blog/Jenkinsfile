@@ -3,19 +3,21 @@ node{
         checkout scm
         sh 'echo Repository cloned'
     }
-    stage('Building app.'){
-        app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
-        sh 'echo App builded.'
-    }
-    stage('Pushing to hub'){
-        docker.withRegistry('https://registry.hub.docker.com/', 'docker_hub') {
+    // stage('Building app.'){
+    //     app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
+    //     sh 'echo App builded.'
+    // }
+    stage('Pulling from hub'){
+        docker.withRegistry('http://localhost:55009/') {
             app.push("latest")
         }
     }
+    stage('Pulling on Minikube Docker.'){
+        sh 'minikube ssh'
+        sh 'doker pull jakubnajman/'
+    }
     stage('Test image'){
-        //app.inside {
-            sh 'echo Test passed.'
-        //}
+        sh 'echo Test passed.'
     }
     stage('Deploying on Kubernetes'){
         sh 'eval $(minikube docker-env)'

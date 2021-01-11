@@ -28,24 +28,24 @@ spec:
     spec:
       containers:
       - name: blog
-        image: jakubnajman/blog_app:latest
+        image: localhost:5000/blog_app
         env:
-        - name: POSTGRES_PASSWORD
+        - name: DATABASE_PASSWORD
           valueFrom: 
             secretKeyRef:
               name: dbsecret
               key: DATABASE_PASSWORD
-        - name: POSTGRES_USER
+        - name: DATABASE_USERNAME
           valueFrom: 
             secretKeyRef:
               name: dbsecret
               key: DATABASE_USERNAME
-        - name: POSTGRES_DB
+        - name: DATABASE_NAME
           valueFrom: 
             secretKeyRef:
               name: dbsecret
               key: DATABASE_NAME
-        - name: PGHOST
+        - name: DATABASE_HOST
           valueFrom: 
             secretKeyRef:
               name: dbsecret
