@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: blog
-        image: jakubnajman/blog
+        image: jakubnajman/blog:latest
         imagePullPolicy: Never
         env:
         - name: PGPASSWORD
