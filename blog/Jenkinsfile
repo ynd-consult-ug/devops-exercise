@@ -4,9 +4,9 @@ node() {
         git 'https://github.com/mparadowsky/devops-exercise'
     }
     stage("Building image") {
-        myImage = docker.build("090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog", "./blog")
+        myImage = docker.build("mparadowsky/blog", "./blog")
     }
-    stage("Pushing image to ECR") {
+    stage("Pushing image to docker hub") {
         myImage.push("latest")
     }
      stage("Clearing pods and deployments") {

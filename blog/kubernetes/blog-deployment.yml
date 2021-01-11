@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: blog
-        image: 090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog:latest
+        image: mparadowsky/blog
         env:
           - name: PGHOST
             value: database-service.default.svc.cluster.local
