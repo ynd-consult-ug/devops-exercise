@@ -12,10 +12,10 @@ node{
             app.push("latest")
         }
     }
-    stage('Pulling on Minikube Docker.'){
-        sh 'minikube ssh'
-        sh 'doker pull jakubnajman/'
-    }
+    // stage('Pulling on Minikube Docker.'){
+    //     sh 'minikube ssh'
+    //     sh 'doker pull jakubnajman/'
+    // }
     stage('Test image'){
         sh 'echo Test passed.'
     }
