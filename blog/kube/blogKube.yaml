@@ -29,7 +29,7 @@ spec:
       containers:
       - name: blog
         image: app/blog
-s        # imagePullPolicy: Never
+        # imagePullPolicy: Never
         env:
         - name: PGPASSWORD
           value: blog_backend
