@@ -1,6 +1,6 @@
 node() {
     def myImage
-    stage("git") {
+    stage("Cloning repository") {
         git 'https://github.com/mparadowsky/devops-exercise'
     }
     stage("Building image") {
@@ -13,10 +13,8 @@ node() {
         sh 'kubectl delete deployment/blog'
         sh 'kubectl delete deployment/database'
     }
-    stage("Launching new deployments") {
+    stage("Launching app") {
         sh 'kubectl apply -f blog/kubernetes'
-    }
-    stage("Opening service") {
         sh 'minikube service blog-svc'
     }
 }
