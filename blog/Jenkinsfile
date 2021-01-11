@@ -8,7 +8,7 @@ node{
         sh 'echo App builded.'
     }
     stage('Pushing to hub'){
-        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {
+        docker.withRegistry('https://registry.hub.docker.com/', 'docker_hub') {
             app.push("latest")
         }
     }
