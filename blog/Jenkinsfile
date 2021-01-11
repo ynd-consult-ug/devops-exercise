@@ -3,11 +3,11 @@ node{
         checkout scm
         sh 'echo Repository cloned'
     }
-    // stage('Building app.'){
-    //     app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
-    //     sh 'echo App builded.'
-    // }
-    stage('Pulling from hub'){
+    stage('Building app'){
+        app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
+        sh 'echo App builded.'
+    }
+    stage('Pushing to local registry'){
         docker.withRegistry('http://localhost:55009/') {
             app.push("latest")
         }
