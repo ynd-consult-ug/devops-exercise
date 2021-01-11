@@ -21,17 +21,17 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
-                key: POSTGRES_DB
+                key: DATABASE_NAME
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
-                key: POSTGRES_PASSWORD
+                key: DATABASE_PASSWORD
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
                 name: dbsecrets
-                key: POSTGRES_USER
+                key: DATABASE_USERNAME
         ports:
           - containerPort: 5432
     
