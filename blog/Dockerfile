@@ -10,9 +10,6 @@ COPY ./blog/yarn.lock /blog/Gemfile ./
 RUN yarn upgrade @rails/webpacker
 RUN bundle install
 
-#COPY . .
 COPY /blog/. /blog/app
-
-#ENV DATABASE_HOST="postgresql-service.default.svc.cluster.local"
 
 ENTRYPOINT /blog/app/docker-entrypoint.sh

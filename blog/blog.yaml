@@ -38,13 +38,5 @@ spec:
             secretKeyRef:
               name: mysecret
               key: PGHOST
-#        - name: PGPASSWORD
-#          value: blog_backend
-#       - name: PGUSER
-#          value: blog_backend
-#        - name: PGDATABASE
-#          value: blog_backend
-#        - name: PGHOST
-#          value: postgresql-service.default.svc.cluster.local
         ports:
           - containerPort: 3000
