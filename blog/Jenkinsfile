@@ -4,7 +4,7 @@ node{
         sh 'echo Repository cloned'
     }
     stage('Building app.'){
-        app = docker.build("jakubnajman/blog:latest","-f blog/Dockerfile .")
+        app = docker.build("app/blog:latest","-f blog/Dockerfile .")
         sh 'echo App builded.'
     }
     stage('Test image'){
