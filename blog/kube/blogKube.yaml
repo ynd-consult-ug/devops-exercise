@@ -30,13 +30,25 @@ spec:
       - name: blog
         image: jakubnajman/blog_app:latest
         env:
-        - name: PGPASSWORD
-          value: blog_backend
-        - name: PGUSER
-          value: blog_backend
-        - name: PGDATABASE
-          value: blog_backend
+        - name: POSTGRES_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: dbSecret
+              key: DATABASE_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom: 
+            secretKeyRef:
+              name: dbSecret
+              key: DATABASE_USERNAME
+        - name: POSTGRES_DB
+          valueFrom: 
+            secretKeyRef:
+              name: dbSecret
+              key: DATABASE_NAME
         - name: PGHOST
-          value: postgresql-service.default.svc.cluster.local
+          valueFrom: 
+            secretKeyRef:
+              name: dbSecret
+              key: DATABASE_HOST
         ports:
           - containerPort: 3000

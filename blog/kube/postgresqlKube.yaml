@@ -31,8 +31,17 @@ spec:
         image: postgres:latest
         env:
         - name: POSTGRES_PASSWORD
-          value: blog_backend
+          valueFrom: 
+            secretKeyRef:
+              name: dbSecret
+              key: DATABASE_PASSWORD
         - name: POSTGRES_USER
-          value: blog_backend
+          valueFrom: 
+            secretKeyRef:
+              name: dbSecret
+              key: DATABASE_USERNAME
         - name: POSTGRES_DB
-          value: blog_backend
+          valueFrom: 
+            secretKeyRef:
+              name: dbSecret
+              key: DATABASE_NAME
