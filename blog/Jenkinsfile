@@ -32,6 +32,7 @@ node {
 //       sh 'minikube start'
 
         sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
+        sh 'cd blog && kubectl apply -f mysecret.yaml'
         sh 'cd blog && kubectl apply -f blog.yaml'      
 
 //       The following section is done manually because db deployment and services
