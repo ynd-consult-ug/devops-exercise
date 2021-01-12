@@ -1,17 +1,17 @@
 FROM yndconsult/docker-ruby:2.6.3-centos7
-WORKDIR "/blog/app"
+WORKDIR "/app"
 
 RUN curl –sL https://rpm.nodesource.com/setup_10.x | bash -
 RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 
 RUN yum install yarn nodejs postgresql-devel bundler -y
-COPY ./blog/yarn.lock /blog/Gemfile ./
+COPY ./yarn.lock /Gemfile ./
 
 RUN yarn upgrade @rails/webpacker
 RUN bundle install
 
 #COPY . .
-COPY /blog/. /blog/app
+COPY /. /app
 
 # ENV DATABASE_NAME="blog_backend"
 # ENV DATABASE_PASSWORD="blog_backend"

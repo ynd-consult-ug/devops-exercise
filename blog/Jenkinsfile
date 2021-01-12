@@ -4,12 +4,21 @@ node{
         sh 'echo Repository cloned'
     }
     stage('Building app'){
-        app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
+        //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
+        // uzywac docker compose do pusha i pulla
+        sh 'docker-compose up --build'
         sh 'echo App builded.'
     }
     stage('Pushing to local registry'){
-        docker.withRegistry('http://localhost:55009/') {
-            app.push("latest")
+        //docker.withRegistry('http://localhost:55009/') {
+        //    Date 
+        //    app.push("latest")
+        //    nie uzywac taga latest (tagow statycznych)
+        sh 'docker tag blog_app http://localhost:5509/blog_app:latest'
+        sh 'docker tag blog_app http://localhost:5509/blog_app:$(git rev-parse --short HEAD)'
+        sh 'docker push http://localhost:5509/blog_app:latest'
+        sh 'docker push http://localhost:5509/blog_app:$(git rev-parse --short HEAD)'
+
         }
     }
     // stage('Pulling on Minikube Docker.'){
@@ -21,6 +30,7 @@ node{
     }
     stage('Deploying on Kubernetes'){
         sh 'eval $(minikube docker-env)'
+        sh "sed -i 's/latest/$(git rev-parse --short HEAD)/' kube/blogKube.yaml"
         sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
     }
