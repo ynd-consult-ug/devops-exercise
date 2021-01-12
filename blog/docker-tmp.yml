@@ -3,7 +3,7 @@ services:
   blog_c:
     image: "$HOSTunoterr1/blog_comp:$IMAGE"
     build: 
-      context: ./blog
+      context: .
       dockerfile: Dockerfile
     ports: 
       - 3000:3000
