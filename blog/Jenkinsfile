@@ -33,7 +33,7 @@ node{
         // sh "sed -i 's/latest/$(git rev-parse --short HEAD)/' kube/blogKube.yaml"
         sh 'env IMAGEUPTODATE=$(git rev-parse --short HEAD)'
         sh 'cd blog/kube && envsubst < blogKube.yaml'
-        sh 'kubectl apply -f blog/kube/'
+        sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
     }
     // stage('Starting services'){
