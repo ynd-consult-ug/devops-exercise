@@ -4,4 +4,4 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    image: $HOSTunoterr1/blog_comp:$IMAGE
+    image: "$HOSTunoterr1/blog_comp:$IMAGE"
