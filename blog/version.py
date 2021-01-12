@@ -13,12 +13,12 @@ import sys
 import yaml
 
 def version(a):
-    with open('mysecrets.yaml') as f:
+    with open('mysecret.yaml') as f:
         doc = yaml.load(f)
 
     doc['stringData']['IMAGE_VERSION'] = a
 
-    with open('mysecrets.yaml', 'w') as f:
+    with open('mysecret.yaml', 'w') as f:
         yaml.dump(doc, f)
 
 # def version(a):
