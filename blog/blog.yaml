@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  labels:
+    purpose: blog
+spec:
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - name: blog
+#        image: unoterr1/blog_pipe:latest
+        imagePullPolicy: Always
+#       image: localhost:5000/unoterr1/blog_pipe:latest
+        image: localhost:5000/unoterr1/blog_pipe:$IMAGE
+        env:
+        -  name: DATABASE_USERNAME
+           valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DATABASE_USERNAME
+        -  name: DATABASE_PASSWORD
+           valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DATABASE_PASSWORD
+        -  name: DATABASE_NAME
+           valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DATABASE_NAME
+        -  name: DATABASE_HOST
+           valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DATABASE_HOST
+        ports:
+          - containerPort: 3000

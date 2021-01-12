@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  labels:
+    purpose: database
+spec:
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgres:latest
+        env:
+        -  name: POSTGRES_USER
+           valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DATABASE_USERNAME
+        -  name: POSTGRES_PASSWORD
+           valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DATABASE_PASSWORD
+        -  name: POSTGRES_DB
+           valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DATABASE_NAME
