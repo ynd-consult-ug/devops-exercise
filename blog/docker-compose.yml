@@ -20,7 +20,7 @@ services:
     build: .
     ports:
       - '3000:3000'
-    image: "090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog:"
+    image: "090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog"
 
   traefik:
     restart: on-failure
