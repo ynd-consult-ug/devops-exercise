@@ -33,7 +33,7 @@ node{
         // sh "sed -i 's/latest/$(git rev-parse --short HEAD)/' kube/blogKube.yaml"
         // sh 'export IVER=$(git rev-parse --short HEAD)'
         // sh 'yum install gettext'
-        sh 'export IVER=$(git rev-parse --short HEAD) | cd blog/kube && envsubst < blogKube.yaml | cd blog && kubectl apply -f kube/'
+        sh 'export IVER=$(git rev-parse --short HEAD) && cd blog/kube && envsubst < blogKube.yaml && cd .. && kubectl apply -f kube/'
         sh 'cd blog/kube | kubectl apply -f addit/'
         // sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
