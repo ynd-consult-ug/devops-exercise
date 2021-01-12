@@ -5,7 +5,7 @@ def version(a):
     with open('mysecret.yaml') as f:
         doc = yaml.load(f)
 
-    doc['stringData']['IMAGE_VERSION'] = a.str()
+    doc['stringData']['IMAGE_VERSION'] = str(a)
 
     with open('mysecret.yaml', 'w') as f:
         yaml.dump(doc, f)
