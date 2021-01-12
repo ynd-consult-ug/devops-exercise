@@ -18,4 +18,4 @@ COPY /. /app
 # ENV DATABASE_USERNAME="blog_backend"
 # ENV DATABASE_HOST="postgresql-service.default.svc.cluster.local"
 
-ENTRYPOINT /blog/app/docker-entrypoint.sh
+ENTRYPOINT /app/docker-entrypoint.sh
