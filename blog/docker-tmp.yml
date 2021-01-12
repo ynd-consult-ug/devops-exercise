@@ -5,4 +5,4 @@ services:
     ports:
       - '3000:3000'
 #    image: "$HOSTunoterr1/blog_comp:$IMAGE"
-    image: "unoterr1/blog_comp"
+    image: $HOST$IMAGE
