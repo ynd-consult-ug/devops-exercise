@@ -9,6 +9,7 @@ COPY yarn.lock Gemfile ./
 
 RUN yarn upgrade @rails/webpacker
 RUN yarn add gettext
+RUN gem install actionview
 RUN bundle install
 
 COPY . .
