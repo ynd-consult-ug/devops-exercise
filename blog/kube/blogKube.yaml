@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-service
+spec:
+  selector:
+    app: blog
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  labels:
+    purpose: blog
+spec:
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      # imagePullSecrets:
+      # - name: azure
+      containers:
+      - name: blog
+        image: hub.docker.com/jakubnajman/blog_app:$IVER
+        # image: yndblog.azurecr.io/blog_app
+        # imagePullPolicy: Always
+        env:
+        - name: DATABASE_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_PASSWORD
+        - name: DATABASE_USERNAME
+          valueFrom: 
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_USERNAME
+        - name: DATABASE_NAME
+          valueFrom: 
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_NAME
+        - name: DATABASE_HOST
+          valueFrom: 
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_HOST
+        ports:
+          - containerPort: 3000

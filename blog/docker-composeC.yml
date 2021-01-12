@@ -1,0 +1,60 @@
+version: '3'
+services: 
+  # db:
+  #   image: 'postgres:latest'
+  #   restart: always
+  #   # env_file: blog.env
+  #   environment: 
+  #     - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+  #     - POSTGRES_USER=${DATABASE_USERNAME}
+  #     - POSTGRES_DB=${DATABASE_NAME}
+
+  blog:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    # env_file: blog.env
+    ports: 
+      - '3000:3000'
+    tty: true
+    environment: 
+      - PGHOST=${DATABASE_HOST}
+      - PGUSER=${DATABASE_USERNAME}
+      - PGDATABASE=${DATABASE_NAME}
+      - PGPASSWORD=${DATABASE_PASSWORD}
+    image: 'hub.docker.com/jakubnajman/blog_app:$IVER'
+    # links:
+      # - redis
+      # - db
+      # - traefik
+    # labels: 
+    #   - traefik.enable=true
+    #   - traefik.http.routers.blogdash.rule=Host("blog.lvh.me")
+    #   - traefik.http.services.blog.loadbalancer.server.port=3000
+      
+  # redis:
+  #   image: 'redis:latest'
+
+  # traefik:
+  #   image: 'traefik:latest'
+  #   command: 
+  #     #mozliwosc dostepu do api traefika prosto z entrypointa
+  #     - --api.insecure=true 
+  #     #ustawienie dockera jako providera
+  #     - --providers.docker
+  #     #umozliwia dostep do dashboarda
+  #     - --api.dashboard=true
+  #     #ustawienie loga na poziom debug
+  #     - --log.level=DEBUG
+  #   ports:
+  #     - "8080:8080"
+  #     - "80:80"
+  #   volumes:
+  #     #traefik moze posluchiwac eventy dockera
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   labels: 
+  #     - traefik.enable=true
+  #     - traefik.http.routers.dashboard.rule=Host("traefik.lvh.me")
+  #     - traefik.http.services.traefik.loadbalancer.server.port=8080
+  
+  
