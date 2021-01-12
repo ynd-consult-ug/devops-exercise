@@ -1,15 +1,21 @@
 import sys
-import ruamel.yaml
+from ruamel.yaml import YAML
+
+# def version(a):
+#     file_name = 'mysecret.yaml'
+#     config, ind, bsi = ruamel.yaml.util.load_yaml_guess_indent(open(file_name))
+#     ver = config['stringData']
+#     ver[0]['IMAGE_VERSION'] = a
+#     with open('mysecret.yaml', 'w') as fp:
+#         yaml.dump(config, fp)
+#     print("Your version is: ", a) 
 
 def version(a):
-    import ruamel.yaml
-    file_name = 'mysecret.yaml'
-    config, ind, bsi = ruamel.yaml.util.load_yaml_guess_indent(open(file_name))
-    ver = config['stringData']
-    ver[0]['IMAGE_VERSION'] = a
-    with open('mysecret.yaml', 'w') as fp:
-        yaml.dump(config, fp)
-    print("Your version is: ", a) 
+    yaml = YAML()
+    mf = pathlib.Path('mysecret.yaml')
+    doc = yaml.load(mf)
+    doc['stringData']['IMAGE_VERSION'] = a
+    yaml.dump(doc, mf)
 
 if __name__ == "__main__":
     a = int(sys.argv[1])
