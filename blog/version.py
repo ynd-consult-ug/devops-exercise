@@ -14,7 +14,7 @@ def version(a):
     yaml = YAML()
     mf = 'mysecret.yaml'
     doc = yaml.load(mf)
-    doc['stringData']['IMAGE_VERSION'] = a
+    doc[0]['IMAGE_VERSION'] = a
     yaml.dump(doc, mf)
 
 if __name__ == "__main__":
