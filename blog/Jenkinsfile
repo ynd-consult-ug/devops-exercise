@@ -39,7 +39,7 @@ node {
 //        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
 
         sh 'cd blog && kubectl apply -f mysecret.yaml'
-        sh 'base = "localhost:5000/unoterr1/blog_pipe:"'
+        sh 'export base="localhost:5000/unoterr1/blog_pipe:"'
 //        sh 'export IMAGE="localhost:5000/unoterr1/blog_pipe:"+${env.BUILD_NUMBER}'
         sh 'export IMAGE="${base}${env.BUILD_NUMBER}'
 
