@@ -10,7 +10,7 @@ node {
  //       app = docker.build("unoterr1/blog_pipe", "-f blog/Dockerfile .")
  //      app = docker.build("unoterr1/blog_pipe", "./blog")
  
-       sh """export HOST="localhost:55001/" && export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < docker_compose.yml > docker_tmp.yml | docker-compose -f docker-tmp.yml build"""
+       sh """export HOST="localhost:55001/" && export IMAGE="${env.BUILD_NUMBER}" && envsubst < /blog/docker_compose.yml > /blog/docker_tmp.yml | cd blog && docker-compose -f docker-tmp.yml build"""
 
         //The same thing as the following command, but a bit fancy. Requires Docker Pipeline Jenkins plugin.
         //sh 'cd blog && docker-compose up --build'
