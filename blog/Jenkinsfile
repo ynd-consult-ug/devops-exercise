@@ -26,7 +26,7 @@ node {
 
     stage('Push') {
 
-        sh """docker-compose push blog_c"""
+        sh """docker-compose push blog"""
 
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
 
