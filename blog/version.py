@@ -12,7 +12,7 @@ import sys
 
 import yaml
 
-def sversion(a):
+def version(a):
     with open('mysecrets.yaml') as f:
         doc = yaml.load(f)
 
