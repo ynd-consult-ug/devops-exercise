@@ -1,3 +1,7 @@
+AZUREID = 'yndblog'
+AZUREPASSWORD = 'LT6qcAlPKU+mJnkAkvYJj15L/PtaZioy'
+
+
 node{
     stage('Clone repository'){
         checkout scm
@@ -20,9 +24,9 @@ node{
     }
     stage('Deploying on Kubernetes'){
         sh 'eval $(minikube docker-env)'
-        withCredentials('azure'){
-            sh 'docker login yndblog.azurecr.io/blog_app --username=$USERNAME --password=$PASSWORD'
-        }
+        // withCredentials('azure'){
+            sh 'docker login yndblog.azurecr.io/blog_app --username=$AZUREID --password=$AZUREPASSWORD'
+        // }
         sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
     }
