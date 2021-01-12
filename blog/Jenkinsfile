@@ -37,8 +37,10 @@ node {
 //       sh 'minikube start'
 
 //        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
+
         sh 'cd blog && kubectl apply -f mysecret.yaml'
-        sh 'cd blog && kubectl apply -f blog.yaml'      
+        sh 'cd blog && kubectl apply -f blog.yaml'    
+        sh 'kubectl patch deployment blog --patch "$(cat patch.yaml)"'
 
 //       The following section is done manually because db deployment and services
 //       in this case do not need to be recreated everytime because no changes are introduced to them.
