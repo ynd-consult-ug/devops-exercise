@@ -6,7 +6,7 @@ node{
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
-        sh 'docker-compose up --build'
+        sh 'blog/docker-compose up --build'
         sh 'echo App builded.'
     }
     stage('Pushing to local registry'){
@@ -31,7 +31,7 @@ node{
     stage('Deploying on Kubernetes'){
         sh 'eval $(minikube docker-env)'
         // sh "sed -i 's/latest/$(git rev-parse --short HEAD)/' kube/blogKube.yaml"
-        sh 'cd blog && kubectl apply -f kube/'
+        sh 'kubectl apply -f blog/kube/'
         sh 'echo Deployments and services aplied.'
     }
     // stage('Starting services'){
