@@ -14,8 +14,11 @@ node() {
         }
     }
        stage("Launching app") {
-         sh 'kubectl apply -f blog/kubernetes'
-         sh 'minikube service blog-svc'
+        withEnv(['VERSION='+ver]) {
+            sh 'kubectl apply -f blog/kubernetes'
+            sh 'minikube service blog-svc'
+        }
+        
     }
 }
 
