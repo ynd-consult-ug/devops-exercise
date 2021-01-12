@@ -42,9 +42,10 @@ node {
 //        sh 'export base="localhost:5000/unoterr1/blog_pipe:"'
 //        sh 'export IMAGE="localhost:5000/unoterr1/blog_pipe:"+${env.BUILD_NUMBER}'
 //        sh 'export IMAGE="${base$env.BUILD_NUMBER}"'
-        sh """export IMAGE="${env.BUILD_NUMBER}" """
+//        sh """export IMAGE="${env.BUILD_NUMBER}" """
 
-        sh 'cd blog && envsubst < blog.yaml > blog_tmp.yaml | kubectl apply -f blog_tmp.yaml'
+        sh """export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < blog.yaml > blog_tmp.yaml | kubectl apply -f blog_tmp.yaml"""
+
 //          sh "cat /blog/blog.yaml | envsubst | kubectl apply -f -"
 //        sh 'cd blog && kubectl apply -f mysecret.yaml'
 //        sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
