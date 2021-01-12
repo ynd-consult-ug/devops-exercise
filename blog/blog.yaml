@@ -40,10 +40,5 @@ spec:
             secretKeyRef:
               name: mysecret
               key: DATABASE_HOST
-        -  name: IMAGE_VERSION
-           valueFrom:
-            secretKeyRef:
-              name: mysecret
-              key: IMAGE_VERSION
         ports:
           - containerPort: 3000
