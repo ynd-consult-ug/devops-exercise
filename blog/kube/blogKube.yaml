@@ -30,7 +30,7 @@ spec:
       # - name: azure
       containers:
       - name: blog
-        image: https://hub.docker.com/blog_app:$IVER
+        image: hub.docker.com/blog_app:$IVER
         # image: yndblog.azurecr.io/blog_app
         # imagePullPolicy: Always
         env:

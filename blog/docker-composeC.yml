@@ -22,7 +22,7 @@ services:
       - PGUSER=${DATABASE_USERNAME}
       - PGDATABASE=${DATABASE_NAME}
       - PGPASSWORD=${DATABASE_PASSWORD}
-    image: 'https://hub.docker.com/blog_app:$IVER'
+    image: 'hub.docker.com/blog_app:$IVER'
     # links:
       # - redis
       # - db
