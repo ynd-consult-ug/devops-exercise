@@ -5,3 +5,4 @@ services:
       context: .
       dockerfile: Dockerfile
     image: "$HOSTunoterr1/blog_comp:$IMAGE"
+    container_name: blog_c
