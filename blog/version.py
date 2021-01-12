@@ -12,7 +12,7 @@ from ruamel.yaml import YAML
 
 def version(a):
     yaml = YAML()
-    mf = pathlib.Path('mysecret.yaml')
+    mf = 'mysecret.yaml'
     doc = yaml.load(mf)
     doc['stringData']['IMAGE_VERSION'] = a
     yaml.dump(doc, mf)
