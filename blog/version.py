@@ -9,7 +9,7 @@ def version(a):
     ver[0]['IMAGE_VERSION'] = a
     with open('mysecret.yaml', 'w') as fp:
         yaml.dump(config, fp)
-    print "Your version is: ", a 
+    print("Your version is: ", a) 
 
 if __name__ == "__main__":
     a = int(sys.argv[1])
