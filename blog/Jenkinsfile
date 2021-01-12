@@ -14,10 +14,10 @@ node{
         //    Date 
         //    app.push("latest")
         //    nie uzywac taga latest (tagow statycznych)
-        sh 'docker tag blog_app localhost:5509/blog_app:latest'
-        sh 'docker tag blog_app localhost:5509/blog_app:$(git rev-parse --short HEAD)'
-        sh 'docker push localhost:5509/blog_app:latest'
-        sh 'docker push localhost:5509/blog_app:$(git rev-parse --short HEAD)'
+        sh 'docker tag blog_app localhost:55009/blog_app:latest'
+        sh 'docker tag blog_app localhost:55009/blog_app:$(git rev-parse --short HEAD)'
+        sh 'docker push localhost:55009/blog_app:latest'
+        sh 'docker push localhost:55009/blog_app:$(git rev-parse --short HEAD)'
 
         
     }
