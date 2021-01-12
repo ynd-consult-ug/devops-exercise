@@ -26,7 +26,7 @@ node {
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
         docker.withRegistry('http://localhost:55001/') {        
             app.push("${env.BUILD_NUMBER}")   
-            sh "cd blog && python3 version.py ${env.BUILD_NUMBER}"         
+//           sh "cd blog && python3 version.py ${env.BUILD_NUMBER}"         
 //           app.push("latest")        
             }    
         }
@@ -39,9 +39,14 @@ node {
 //        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
 
         sh 'cd blog && kubectl apply -f mysecret.yaml'
-        sh 'cd blog && kubectl apply -f blog.yaml'    
+        sh 'base = "localhost:5000/unoterr1/blog_pipe:"'
+//        sh 'export IMAGE="localhost:5000/unoterr1/blog_pipe:"+${env.BUILD_NUMBER}'
+        sh 'export IMAGE="${base}${env.BUILD_NUMBER}'
+
+        sh 'envsubst < blog.yaml | cd blog | kubectl apply -f blog.yaml'
+//        sh 'cd blog && kubectl apply -f mysecret.yaml'
 //        sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
-        sh 'cd blog && kubectl patch deployment blog -p "$(cat patch.yaml)"'
+//        sh 'cd blog && kubectl patch deployment blog -p "$(cat patch.yaml)"'
 //       The following section is done manually because db deployment and services
 //       in this case do not need to be recreated everytime because no changes are introduced to them.
 
