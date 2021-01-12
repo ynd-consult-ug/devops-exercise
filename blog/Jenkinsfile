@@ -8,7 +8,10 @@ node {
 
     stage('Build image') {
  //       app = docker.build("unoterr1/blog_pipe", "-f blog/Dockerfile .")
-       app = docker.build("unoterr1/blog_pipe", "./blog")
+ //      app = docker.build("unoterr1/blog_pipe", "./blog")
+ 
+       sh """export HOST="localhost:55001/" && export IMAGE="${env.BUILD_NUMBER} && cd blog && envsubst < docker_compose.yml > docker_tmp.yml | ocker-compose -f docker-compose.yml build"""
+
       
         //The same thing as the following command, but a bit fancy. Requires Docker Pipeline Jenkins plugin.
         //sh 'cd blog && docker-compose up --build'
@@ -22,40 +25,38 @@ node {
 //  This section was used to push created image to dockerhub but now it is done without it
 //  using imagePullPolicy: Never in blog.yaml 
 
-    stage('Push Hub') {
+    stage('Push') {
+
+        sh """docker-compose push blog_c"""
+
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
-        docker.withRegistry('http://localhost:55001/') {        
-            app.push("${env.BUILD_NUMBER}")   
-//           sh "cd blog && python3 version.py ${env.BUILD_NUMBER}"         
+
+//        docker.withRegistry('http://localhost:55001/') {        
+//            app.push("${env.BUILD_NUMBER}")   
+
+
+
 //           app.push("latest")        
             }    
         }
 
 
     stage('Deploy App') {
-
 //       sh 'minikube start'
-
 //        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
 
-        sh 'cd blog && kubectl apply -f mysecret.yaml'
-//        sh 'export base="localhost:5000/unoterr1/blog_pipe:"'
-//        sh 'export IMAGE="localhost:5000/unoterr1/blog_pipe:"+${env.BUILD_NUMBER}'
-//        sh 'export IMAGE="${base$env.BUILD_NUMBER}"'
-//        sh """export IMAGE="${env.BUILD_NUMBER}" """
+        sh "cd blog && kubectl apply -f mysecret.yaml"
+
+//          sh "cd blog && python3 version.py ${env.BUILD_NUMBER}" 
+//          sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
 
         sh """export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < blog.yaml > blog_tmp.yaml | kubectl apply -f blog_tmp.yaml"""
 
-//          sh "cat /blog/blog.yaml | envsubst | kubectl apply -f -"
-//        sh 'cd blog && kubectl apply -f mysecret.yaml'
-//        sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
-//        sh 'cd blog && kubectl patch deployment blog -p "$(cat patch.yaml)"'
 //       The following section is done manually because db deployment and services
 //       in this case do not need to be recreated everytime because no changes are introduced to them.
 
 //       sh 'cd blog && kubectl apply -f service_db.yaml'
 //       sh 'cd blog && kubectl apply -f service_blog.yaml'
 //       sh 'cd blog && kubectl apply -f db.yaml'
-
     }
 }
