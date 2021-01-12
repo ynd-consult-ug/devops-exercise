@@ -1,21 +1,19 @@
-node() {
-    def myImage
-    stage("Cloning repository") {
-        git 'https://github.com/mparadowsky/devops-exercise'
-    }
-    stage("Building image") {
-        myImage = docker.build("090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog", "./blog")
-    }
-    stage("Pushing image to ECR") {
-        myImage.push("latest")
-    }
-     stage("Clearing pods and deployments") {
-        sh 'kubectl apply -f blog/kubernetes'
-        sh 'kubectl delete deployment/blog'
-        sh 'kubectl delete deployment/database'
-    }
-    stage("Launching app") {
-        sh 'kubectl apply -f blog/kubernetes'
-        sh 'minikube service blog-svc'
-    }
-}
+// node() {
+//     def myImage
+//     def version
+//     stage("Cloning repository") {
+//         git 'https://github.com/mparadowsky/devops-exercise'
+//     }
+//     stage("Building image") {
+//         myImage = docker.build("090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog", "./blog")
+//     }
+//     stage("Pushing image to ECR") {
+//         version = sh (script: "git log -n 1 --pretty=format:'%H'",returnStdout: true)
+//         myImage.push("latest")
+//     }
+
+//     stage("Launching app") {
+//         sh 'kubectl apply -f blog/kubernetes'
+//         sh 'minikube service blog-svc'
+//     }
+// }

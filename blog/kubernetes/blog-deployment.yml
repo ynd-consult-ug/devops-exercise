@@ -16,6 +16,7 @@ spec:
       containers:
       - name: blog
         image: 090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog
+        imagePullPolicy: Always
         env:
           - name: DATABASE_HOST
             valueFrom:

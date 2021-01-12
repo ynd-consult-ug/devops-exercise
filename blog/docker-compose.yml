@@ -17,23 +17,11 @@ services:
       
   blog:
     restart: on-failure
-    image: mparadowsky/blog:env
+    build: .
     ports:
       - '3000:3000'
-    #env_file: .env
-    # environment:
-      # - PGDATABASE=${DATABASE_NAME} 
-      # - PGPASSWORD=${DATABASE_PASSWORD}
-      # - PGUSER=${DATABASE_USERNAME}
-      # - PGHOST=${DATABASE_HOST}
-      #- PGDATABASE=blog_backend
-      #- PGPASSWORD=blog_backend
-      #- PGUSER=blog_backend
-      #- PGHOST=db
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.blog.rule=Host("lvh.me")
-      
+    image: "090660780783.dkr.ecr.eu-central-1.amazonaws.com/blog:"
+
   traefik:
     restart: on-failure
     image: 'traefik:latest'
