@@ -13,7 +13,7 @@ def version(a):
 
 if __name__ == "__main__":
     a = int(sys.argv[1])
-    hello(a)
+    version(a)
 
 # yaml = ruamel.yaml.YAML()
 # yaml.preserve_quotes = True
