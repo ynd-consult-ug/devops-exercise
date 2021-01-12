@@ -43,7 +43,7 @@ node {
 //        sh 'export IMAGE="localhost:5000/unoterr1/blog_pipe:"+${env.BUILD_NUMBER}'
 //        sh 'export IMAGE="${base$env.BUILD_NUMBER}"'
         sh """export IMAGE="${env.BUILD_NUMBER}" """
-        sh 'envsubst < blog.yaml | cd blog && kubectl apply -f blog.yaml'
+        sh 'cd blog && envsubst < blog.yaml | kubectl apply -f blog.yaml'
 //        sh 'cd blog && kubectl apply -f mysecret.yaml'
 //        sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
 //        sh 'cd blog && kubectl patch deployment blog -p "$(cat patch.yaml)"'
