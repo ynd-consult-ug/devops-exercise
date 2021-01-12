@@ -1,8 +1,9 @@
 version: '3'
 services: 
   blog_c:
-    build: 
-      context: .
-      dockerfile: Dockerfile
     image: "$HOSTunoterr1/blog_comp:$IMAGE"
-    container_name: blog_c
+    build: 
+      context: ./blog
+      dockerfile: Dockerfile
+    ports: 
+      - 3000:3000
