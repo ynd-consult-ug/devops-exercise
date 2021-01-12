@@ -6,21 +6,21 @@ node{
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
-        sh 'cd blog && export IVER=$(git rev-parse --short HEAD) && envsubst < docker-composeC.yml > docker-compose.yml && docker-compose up --build'
+        sh 'cd blog && export IVER=$(git rev-parse --short HEAD) && envsubst < docker-compose.yml > docker-composeC.yml && docker-composeC up --build && docker-composeC push blog'
         sh 'echo App builded.'
     }
-    stage('Pushing to local registry'){
-        //docker.withRegistry('http://localhost:55009/') {
-        //    Date 
-        //    app.push("latest")
-        //    nie uzywac taga latest (tagow statycznych)
-        // sh 'docker tag blog_app localhost:55009/blog_app:latest'
-        // sh 'docker tag blog_app localhost:5000/blog_app:$(git rev-parse --short HEAD)'
-        // sh 'docker push localhost:55009/blog_app:latest'
-        sh 'cd blog && export IVER=$(git rev-parse --short HEAD) && envsubst < docker-composeC.yml > docker-compose.yml && docker-compose push localhost:5000/blog_app:$(git rev-parse --short HEAD)'
+    // stage('Pushing to local registry'){
+    //     //docker.withRegistry('http://localhost:55009/') {
+    //     //    Date 
+    //     //    app.push("latest")
+    //     //    nie uzywac taga latest (tagow statycznych)
+    //     // sh 'docker tag blog_app localhost:55009/blog_app:latest'
+    //     // sh 'docker tag blog_app localhost:5000/blog_app:$(git rev-parse --short HEAD)'
+    //     // sh 'docker push localhost:55009/blog_app:latest'
+    //     sh 'cd blog && export IVER=$(git rev-parse --short HEAD) && envsubst < docker-composeC.yml > docker-compose.yml && docker-compose push blog'
 
         
-    }
+    // }
     // stage('Pulling on Minikube Docker.'){
     //     sh 'minikube ssh'
     //     sh 'doker pull jakubnajman/'
