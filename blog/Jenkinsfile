@@ -12,7 +12,6 @@ node {
  
        sh """export HOST="localhost:55001/" && export IMAGE="${env.BUILD_NUMBER} && cd blog && envsubst < docker_compose.yml > docker_tmp.yml | ocker-compose -f docker-compose.yml build"""
 
-      
         //The same thing as the following command, but a bit fancy. Requires Docker Pipeline Jenkins plugin.
         //sh 'cd blog && docker-compose up --build'
     }
@@ -37,7 +36,7 @@ node {
 
 
 //           app.push("latest")        
-            }    
+//            }    
         }
 
 
