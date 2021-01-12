@@ -32,7 +32,7 @@ node{
         sh 'eval $(minikube docker-env)'
         // sh "sed -i 's/latest/$(git rev-parse --short HEAD)/' kube/blogKube.yaml"
         sh 'env IMAGEUPTODATE=$(git rev-parse --short HEAD)'
-        sh 'yum install gettext'
+        // sh 'yum install gettext'
         sh 'cd blog/kube && envsubst < blogKube.yaml'
         sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
