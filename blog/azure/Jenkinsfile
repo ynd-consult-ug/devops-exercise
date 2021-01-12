@@ -20,7 +20,7 @@ node{
     }
     stage('Deploying on Kubernetes'){
         sh 'eval $(minikube docker-env)'
-        withCredentials([usernamePassword(credentialsId: 'azure', yndblog: 'USERNAME', LT6qcAlPKU+mJnkAkvYJj15L/PtaZioy: 'PASSWORD')]){
+        withCredentials([usernamePassword(credentialsId: 'azure')]){
             sh 'docker login yndblog.azurecr.io/blog_app --username=$USERNAME --password=$PASSWORD'
         }
         sh 'cd blog && kubectl apply -f kube/'
