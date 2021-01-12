@@ -26,10 +26,13 @@ spec:
       labels:
         app: blog
     spec:
+      imagePullSecrets:
+      - name: azure
       containers:
       - name: blog
         # image: localhost:5000/blog_app
         image: yndblog.azurecr.io/blog_app
+        imagePullPolicy: IfNotPresent
         env:
         - name: DATABASE_PASSWORD
           valueFrom: 
