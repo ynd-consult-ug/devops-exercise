@@ -17,7 +17,7 @@ node{
         // sh 'docker tag blog_app localhost:55009/blog_app:latest'
         // sh 'docker tag blog_app localhost:5000/blog_app:$(git rev-parse --short HEAD)'
         // sh 'docker push localhost:55009/blog_app:latest'
-        sh 'export IVER=$(git rev-parse --short HEAD) && envsubst < docker-composeC.yml > docker-compose.yml && docker-compose push localhost:5000/blog_app:$(git rev-parse --short HEAD)'
+        sh 'cd blog && export IVER=$(git rev-parse --short HEAD) && envsubst < docker-composeC.yml > docker-compose.yml && docker-compose push localhost:5000/blog_app:$(git rev-parse --short HEAD)'
 
         
     }
