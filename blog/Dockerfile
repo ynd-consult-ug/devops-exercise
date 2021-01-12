@@ -8,6 +8,7 @@ RUN yum install yarn nodejs postgresql-devel bundler -y
 COPY yarn.lock Gemfile ./
 
 RUN yarn upgrade @rails/webpacker
+RUN yarn install gettext
 RUN bundle install
 
 COPY . .
