@@ -32,7 +32,7 @@ spec:
       - name: blog
         image: localhost:5000/blog_app:$IVER
         # image: yndblog.azurecr.io/blog_app
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
         env:
         - name: DATABASE_PASSWORD
           valueFrom: 
