@@ -7,7 +7,9 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("unoterr1/blog_pipe", "-f blog/Dockerfile .")
+ //       app = docker.build("unoterr1/blog_pipe", "-f blog/Dockerfile .")
+       app = docker.build("unoterr1/blog_pipe", "./blog")
+      
         //The same thing as the following command, but a bit fancy. Requires Docker Pipeline Jenkins plugin.
         //sh 'cd blog && docker-compose up --build'
     }
@@ -33,7 +35,7 @@ node {
 
 //       sh 'minikube start'
 
-        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
+//        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
         sh 'cd blog && kubectl apply -f mysecret.yaml'
         sh 'cd blog && kubectl apply -f blog.yaml'      
 

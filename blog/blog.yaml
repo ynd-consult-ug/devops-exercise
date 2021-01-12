@@ -16,7 +16,7 @@ spec:
       containers:
       - name: blog
 #        image: unoterr1/blog_pipe:latest
-#        imagePullPolicy: Never
+        imagePullPolicy: Always
         image: localhost:5000/unoterr1/blog_pipe:latest
         env:
         -  name: DATABASE_USERNAME
