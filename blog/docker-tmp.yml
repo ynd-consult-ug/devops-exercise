@@ -3,5 +3,5 @@ services:
   blog_c:
     build: 
       context: .
-      dockerfile: blog/Dockerfile
+      dockerfile: Dockerfile
     image: "$HOSTunoterr1/blog_comp:$IMAGE"
