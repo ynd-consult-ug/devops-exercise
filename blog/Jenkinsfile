@@ -6,7 +6,7 @@ node{
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
-        sh 'cd blog && export IVER=$(git rev-parse --short HEAD) && envsubst < docker-composeC.yml > docker-compose.yml && docker-compose up --build && docker-compose push blog'
+        sh 'cd blog && export IVER=$(git rev-parse --short HEAD) && envsubst < docker-composeC.yml > docker-compose.yml && docker-compose build && docker-compose push blog'
         sh 'echo App builded.'
     }
     // stage('Pushing to local registry'){
