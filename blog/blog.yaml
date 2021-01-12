@@ -17,7 +17,8 @@ spec:
       - name: blog
 #        image: unoterr1/blog_pipe:latest
         imagePullPolicy: Always
-        image: localhost:5000/unoterr1/blog_pipe:latest
+#       image: localhost:5000/unoterr1/blog_pipe:latest
+        image: localhost:5000/unoterr1/blog_pipe:${IMAGE_VERSION}
         env:
         -  name: DATABASE_USERNAME
            valueFrom:
@@ -39,5 +40,10 @@ spec:
             secretKeyRef:
               name: mysecret
               key: DATABASE_HOST
+        -  name: IMAGE_VERSION
+           valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: IMAGE_VERSION
         ports:
           - containerPort: 3000

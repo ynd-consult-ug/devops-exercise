@@ -25,8 +25,9 @@ node {
     stage('Push Hub') {
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
         docker.withRegistry('http://localhost:55001/') {        
-            app.push("${env.BUILD_NUMBER}")            
-            app.push("latest")        
+            app.push("${env.BUILD_NUMBER}")   
+            sh 'cd blog && pyhon version.py ${env.BUILD_NUMBER}'         
+//           app.push("latest")        
             }    
         }
 
