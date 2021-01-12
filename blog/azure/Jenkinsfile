@@ -20,9 +20,9 @@ node{
     }
     stage('Deploying on Kubernetes'){
         sh 'eval $(minikube docker-env)'
-        // withCredentials([string(credentialsId: 'credsId', AZUREHUB:'yndblog.azurecr.io/blog_app' ,AZUREID: 'yndblog', AZUREPASSWORD: 'LT6qcAlPKU+mJnkAkvYJj15L/PtaZioy')]){
-            sh 'docker login yndblog.azurecr.io/blog_app --username=yndblog --password=LT6qcAlPKU+mJnkAkvYJj15L/PtaZioy'
-        // }
+        withCredentials([usernamePassword(credentialsId: 'azure', AZUREID: 'yndblog', AZUREPASSWORD: 'LT6qcAlPKU+mJnkAkvYJj15L/PtaZioy')]){
+            sh 'docker login yndblog.azurecr.io/blog_app --username=$AZUREID --password=$AZUREPASSWORD'
+        }
         sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
     }
