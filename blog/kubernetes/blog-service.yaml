@@ -4,12 +4,10 @@ metadata:
   name: blog-svc
   labels:
     app: blog
-spec: 
-  type: NodePort
+spec:
   selector:
     app: blog
   ports:
    - protocol: TCP
      port: 3000
      targetPort: 3000
-     nodePort: 30300
