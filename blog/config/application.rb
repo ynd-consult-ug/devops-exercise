@@ -19,6 +19,7 @@ module Blog
     config.lograge.enabled = true
 
     config.hosts << '.lvh.me'
+    config.hosts << "lubie.zycie"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
