@@ -18,7 +18,7 @@ spec:
 #        image: unoterr1/blog_pipe:latest
         imagePullPolicy: Always
 #       image: localhost:5000/unoterr1/blog_pipe:latest
-        image: 192.168.64.2:5000/unoterr1/blog_comp:$IMAGE
+        image: 192.168.64.3:5000/unoterr1/blog_comp:$IMAGE
         env:
         -  name: DATABASE_USERNAME
            valueFrom:
