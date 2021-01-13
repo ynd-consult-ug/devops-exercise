@@ -1,21 +1,20 @@
 node() {
-    def myImage
-    def ver = sh (script: "git rev-parse --short HEAD | tr -d '\n'",returnStdout: true)
-  
+    def myImage def ver = sh (script: "git rev-parse --short HEAD | tr -d '\n'", returnStdout: true) 
     stage("Cloning repository") {
         git 'https://github.com/mparadowsky/devops-exercise'
     }
     stage("Building image") {
         withEnv(['VERSION='+ver]) {
-            sh 'cd blog && docker-compose build blog'
+            sh 'cd blog && docker-compose build blog' 
             sh 'cd blog && docker-compose push blog'
         }
     }
-       stage("Launching app") {
+    stage("Launching app") {
         withEnv(['VERSION='+ver]) {
-            kubernetesDeploy(enableConfigSubstitution: true, configs:"blog/kubernetes/**",kubeconfigId:"kubeconf")
-            sh 'minikube service blog-svc'
+            withCredentials([string(credentialsId: 'DATABASE_HOST', variable: 'DATABASE_HOST'), string(credentialsId: 'DATABASE_NAME', variable: 'DATABASE_NAME'), string(credentialsId: 'DATABASE_PASSWORD', variable: 'DATABASE_PASSWORD'), string(credentialsId: 'DATABASE_USERNAME', variable: 'DATABASE_USERNAME'), string(credentialsId: 'REDIS_URI', variable: 'REDIS_URI')]) {
+                kubernetesDeploy(enableConfigSubstitution: true, configs:"blog/kubernetes/**",kubeconfigId:"kubeconf") 
+                sh 'minikube service blog-svc'
+            }
         }
-        
     }
 }
