@@ -18,11 +18,11 @@ spec:
         image: postgres
         env:
           - name: POSTGRES_PASSWORD
-            value: blog_backend
+            value: $DATABASE_PASSWORD
           - name: POSTGRES_USER
-            value: blog_backend
+            value: $DATABASE_USERNAME
           - name: POSTGRES_DB
-            value: blog_backend
+            value: $DATABASE_NAME
         ports:
           - containerPort: 5432
     
