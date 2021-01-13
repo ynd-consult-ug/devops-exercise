@@ -6,19 +6,16 @@ node() {
         git 'https://github.com/mparadowsky/devops-exercise'
     }
     stage("Building image") {
-        
         withEnv(['VERSION='+ver]) {
             sh 'cd blog && docker-compose build blog'
             sh 'cd blog && docker-compose push blog'
-            
         }
     }
        stage("Launching app") {
         withEnv(['VERSION='+ver]) {
-            sh 'kubectl apply -f blog/kubernetes'
+            kubernetesDeploy(enableConfigSubstitution: true, configs:"blog/kubernetes/**",kubeconfigId:"kubeconf")
             sh 'minikube service blog-svc'
         }
         
     }
 }
-
