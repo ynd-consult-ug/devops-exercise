@@ -5,24 +5,16 @@ node {
     }
     withEnv(['HOST=192.168.64.3:5000/unoterr1/blog_comp:']){
         stage('Build image and push') {
- //      app = docker.build("unoterr1/blog_pipe", "./blog")
-
-        sh """
-        export HOST="${env.HOST}"
-        export IMAGE="${env.BUILD_NUMBER}"
-        cd blog && envsubst < docker-tmp.yml > docker-compose.yml 
-        docker-compose build blog
-        docker-compose push blog
-        """.stripIndent()
-
-//       sh """export HOST="192.168.64.3:5000/unoterr1/blog_comp:" && export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < docker-tmp.yml > docker-compose.yml | docker-compose build blog && docker-compose push blog"""
+            sh """
+            export HOST="${env.HOST}"
+            export IMAGE="${env.BUILD_NUMBER}"
+            cd blog && envsubst < docker-tmp.yml > docker-compose.yml 
+            docker-compose build blog
+            docker-compose push blog
+            """.stripIndent()
         }
     }
-    stage('Test image') {
-            sh 'echo "Tests passed"'
-    }
     stage('Push') {
-
 //        sh """docker-compose push blog"""
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
 //        docker.withRegistry('http://localhost:55001/') {        
