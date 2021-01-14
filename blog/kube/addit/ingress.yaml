@@ -10,7 +10,7 @@ spec:
       http:
         paths:
           - path: /
-            pathType: Prefix
+          #  pathType: Prefix
             backend:
               serviceName: blog-service
               servicePort: 3000
