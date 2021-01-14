@@ -7,9 +7,10 @@ node {
         stage('Build image and push') {
  //      app = docker.build("unoterr1/blog_pipe", "./blog")
 
-        sh """export HOST="${env.HOST}" && export IMAGE="${env.BUILD_NUMBER}" 
+        sh '''export HOST="${env.HOST}" && export IMAGE="${env.BUILD_NUMBER}" 
               && cd blog && envsubst < docker-tmp.yml > docker-compose.yml 
-              | docker-compose build blog """ //&& docker-compose push blog"""
+              | docker-compose build blog 
+        ''' //&& docker-compose push blog"""
 
 //       sh """export HOST="192.168.64.3:5000/unoterr1/blog_comp:" && export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < docker-tmp.yml > docker-compose.yml | docker-compose build blog && docker-compose push blog"""
         }
@@ -31,7 +32,7 @@ node {
              'PASS=blog_backend',
              'DB=blog_backend',
              'HOST=postgresql-service.default.svc.cluster.local']){
-                 
+
         stage('Deploy App') {
 //       sh 'minikube start'
 //        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
