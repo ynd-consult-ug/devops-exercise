@@ -13,7 +13,7 @@ with open("kube/blogKube.yaml", 'r') as stream:
         print(exc)
 
 # Modify the fields from the dict
-loaded['spec']['template']['spec'][] = "Max"
+loaded['spec']['template']['spec']['containers']['name']['image'] = "Max"
 
 # Save it again
 with open("kube/blogKube.yaml", 'w') as stream:
