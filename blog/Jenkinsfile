@@ -7,7 +7,7 @@ node {
         stage('Build image and push') {
  //      app = docker.build("unoterr1/blog_pipe", "./blog")
 
-        sh """export HOST="${env.HOST}" && export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < docker-tmp.yml > docker-compose.yml | docker-compose build blog""" //&& docker-compose push blog"""
+        sh """export HOST="${env.HOST}" && export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < docker-tmp.yml > docker-compose.yml | docker-compose build blog && docker-compose push blog"""
 
 //       sh """export HOST="192.168.64.3:5000/unoterr1/blog_comp:" && export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < docker-tmp.yml > docker-compose.yml | docker-compose build blog && docker-compose push blog"""
         }
@@ -17,7 +17,7 @@ node {
     }
     stage('Push') {
 
-        sh """docker-compose push blog"""
+//        sh """docker-compose push blog"""
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
 //        docker.withRegistry('http://localhost:55001/') {        
 //          app.push("${env.BUILD_NUMBER}")   
@@ -39,9 +39,7 @@ node {
 //          sh "cd blog && python3 version.py ${env.BUILD_NUMBER}" 
 //          sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
 
-            sh """export IMAGE="${env.BUILD_NUMBER}" 
-                  && cd blog && envsubst < blog.yaml > blog_tmp.yaml 
-                  | kubectl apply -f blog_tmp.yaml"""
+            sh """export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < blog.yaml > blog_tmp.yaml | kubectl apply -f blog_tmp.yaml"""
 
 //       The following section is done manually because db deployment and services
 //       in this case do not need to be recreated everytime because no changes are introduced to them.
