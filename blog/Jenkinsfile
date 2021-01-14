@@ -25,21 +25,24 @@ node {
 //            }    
         }
 
-    withEnv(['NAME=blog_backend',
-             'PASS=blog_backend',
-             'DB=blog_backend',
-             'HOST=postgresql-service.default.svc.cluster.local']){
-
-        stage('Deploy App') {
+    withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
+        string(credentialsId: 'USER', variable: 'USER'),
+        string(credentialsId: 'PASS', variable: 'PASS'),
+        string(credentialsId: 'NAME', variable: 'NAME')]) {
+            stage('Deploy App') {
 //       sh 'minikube start'
 //        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
-            sh "cd blog && python3 secret.py ${env.NAME} ${env.PASS} ${env.DB} ${env.HOST}" 
-            sh "cd blog && kubectl apply -f mysecret.yaml"
+//            sh "cd blog && python3 secret.py ${env.NAME} ${env.PASS} ${env.DB} ${env.HOST}" 
+//            sh "cd blog && kubectl apply -f mysecret.yaml"
 
 //          sh "cd blog && python3 version.py ${env.BUILD_NUMBER}" 
 //          sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
 
-            sh """export IMAGE="${env.BUILD_NUMBER}" && cd blog && envsubst < blog.yaml > blog_tmp.yaml | kubectl apply -f blog_tmp.yaml"""
+            sh """
+            export IMAGE="${env.BUILD_NUMBER}"
+            cd blog && envsubst < blog.yaml > blog_tmp.yaml
+            kubectl apply -f blog_tmp.yaml
+            """.stripIndent()
 
 //       The following section is done manually because db deployment and services
 //       in this case do not need to be recreated everytime because no changes are introduced to them.
