@@ -14,7 +14,7 @@ node {
 
     withEnv(['HOST='+host, 'IMAGE='+image]){
         stage('Build image and push') {
-            dir('/blog') {
+            dir('blog') {
                sh """
                 docker-compose build blog
                 docker-compose push blog
