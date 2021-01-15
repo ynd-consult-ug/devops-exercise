@@ -17,7 +17,7 @@ node{
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
-        withEnv(['IVER'=+IVER, DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USERNAME]){
+        withEnv(['IVER='+IVER, DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USERNAME]){
             sh """
                 cd blog
                 envsubst < docker-compose.yml > docker-composeC.yml
