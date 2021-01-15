@@ -1,23 +1,23 @@
 node{
     def IVER = sh (script: "git rev-parse --short HEAD", returnStdout: true)
     // def dbenv = new ConfigSlurper().parse("")
-    environment {
-        DATABASE_HOST=credentials('postgresql-service.default.svc.cluster.local')
-        DATABASE_NAME=credentials('blog_backend')
-        DATABASE_PASSWORD=credentials('blog_backend')
-        DATABASE_USERNAME=credentials('blog_backend')
-    }
+    // environment {
+    //     DATABASE_HOST=credentials('postgresql-service.default.svc.cluster.local')
+    //     DATABASE_NAME=credentials('blog_backend')
+    //     DATABASE_PASSWORD=credentials('blog_backend')
+    //     DATABASE_USERNAME=credentials('blog_backend')
+    // }
     stage('Clone repository'){
         checkout scm
         sh 'echo Repository cloned'
     }
-    stage('Setting environmental variables.'){
+    // stage('Setting environmental variables.'){
 
-    }
+    // }
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
-        withEnv(['IVER='+IVER, 'DATABASE_HOST='+DATABASE_HOST, 'DATABASE_NAME='+DATABASE_NAME, 'DATABASE_PASSWORD='+DATABASE_PASSWORD, 'DATABASE_USERNAME='+DATABASE_USERNAME]){
+        withEnv(['IVER='+IVER, 'DATABASE_HOST=postgresql-service.default.svc.cluster.local', 'DATABASE_NAME=blog_backend', 'DATABASE_PASSWORD=blog_backend', 'DATABASE_USERNAME=blog_backend']){
             sh """
                 cd blog
                 envsubst < docker-compose.yml > docker-composeC.yml
@@ -51,7 +51,7 @@ node{
         // sh 'export IVER=$(git rev-parse --short HEAD)'
         // sh 'yum install gettext'
         // sh 'docker pull localhost:5000/blog_app:$(git rev-parse --short HEAD)'
-        withEnv(['IVER='+IVER, 'DATABASE_HOST='+DATABASE_HOST, 'DATABASE_NAME='+DATABASE_NAME, 'DATABASE_PASSWORD='+DATABASE_PASSWORD, 'DATABASE_USERNAME+'=DATABASE_USERNAME]){
+        withEnv(['IVER='+IVER, 'DATABASE_HOST=postgresql-service.default.svc.cluster.local', 'DATABASE_NAME=blog_backend', 'DATABASE_PASSWORD=blog_backend', 'DATABASE_USERNAME=blog_backend']){
             sh """
                 cd blog/kube
                 envsubst < blogKube.yaml > blog_changed.yaml
