@@ -13,10 +13,12 @@ node{
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
-        sh 'cd blog && export IVER=${IVER} && 
-            envsubst < docker-compose.yml > docker-composeC.yml && 
-            docker-compose -f docker-composeC.yml build && 
+        sh """
+            cd blog && export IVER=${IVER} 
+            envsubst < docker-compose.yml > docker-composeC.yml
+            docker-compose -f docker-composeC.yml build
             docker-compose push blog'
+            """
         sh 'echo App builded.'
     }
     // stage('Pushing to local registry'){
@@ -44,10 +46,12 @@ node{
         // sh 'export IVER=$(git rev-parse --short HEAD)'
         // sh 'yum install gettext'
         // sh 'docker pull localhost:5000/blog_app:$(git rev-parse --short HEAD)'
-        sh 'export IVER=${IVER} &&
-            cd blog/kube && 
-            envsubst < blogKube.yaml > blog_changed.yaml | 
-            kubectl apply -f blog_changed.yaml'
+        sh """
+            export IVER=${IVER}
+            cd blog/kube
+            envsubst < blogKube.yaml > blog_changed.yaml
+            kubectl apply -f blog_changed.yaml
+            """
         sh 'cd blog/kube && kubectl apply -f addit/'
         // sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
