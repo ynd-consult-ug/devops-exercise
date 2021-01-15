@@ -11,15 +11,15 @@ node{
     //     DATABASE_PASSWORD=credentials('blog_backend')
     //     DATABASE_USERNAME=credentials('blog_backend')
     // }
-    def settingEnv(){
-        sh """
-            export IVER=${IVER}
-            export DATABASE_HOST=${DATABASE_HOST}
-            export DATABASE_NAME=${DATABASE_NAME}
-            export DATABASE_PASSWORD=${DATABASE_PASSWORD}
-            export DATABASE_USERNAME=${DATABASE_USERNAME}
-        """
-    }
+    // def settingEnv(){
+    //     sh """
+    //         export IVER=${IVER}
+    //         export DATABASE_HOST=${DATABASE_HOST}
+    //         export DATABASE_NAME=${DATABASE_NAME}
+    //         export DATABASE_PASSWORD=${DATABASE_PASSWORD}
+    //         export DATABASE_USERNAME=${DATABASE_USERNAME}
+    //     """
+    // }
     stage('Clone repository'){
         checkout scm
         sh 'echo Repository cloned'
@@ -30,7 +30,11 @@ node{
                         // envsubst < docker-compose.yml > docker-composeC.yml
         sh """
             cd blog
-            ${settingEnv()}
+            export IVER=${IVER}
+            export DATABASE_HOST=${DATABASE_HOST}
+            export DATABASE_NAME=${DATABASE_NAME}
+            export DATABASE_PASSWORD=${DATABASE_PASSWORD}
+            export DATABASE_USERNAME=${DATABASE_USERNAME}
             envsubst < docker-compose.yml > docker-composeC.yml
             docker-compose -f docker-composeC.yml build
             docker-compose push blog
@@ -64,7 +68,11 @@ node{
                        // envsubst < blogKube.yaml > blog_changed.yaml
         sh """
             cd blog/kube
-            ${settingEnv()}
+            export IVER=${IVER}
+            export DATABASE_HOST=${DATABASE_HOST}
+            export DATABASE_NAME=${DATABASE_NAME}
+            export DATABASE_PASSWORD=${DATABASE_PASSWORD}
+            export DATABASE_USERNAME=${DATABASE_USERNAME}
             envsubst < blogKube.yaml > blog_changed.yaml
             kubectl apply -f blog_changed.yaml
         """
