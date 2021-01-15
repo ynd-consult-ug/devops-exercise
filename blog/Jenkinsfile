@@ -16,6 +16,7 @@ node {
         withEnv(['HOST='+host, 'IMAGE='+image]){
             dir('blog') {
                sh """
+                echo ${image}
                 docker-compose build blog
                 docker-compose push blog
                 """.stripIndent()
@@ -32,7 +33,7 @@ node {
 //            }    
         }
 
-/*    withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
+    withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
         string(credentialsId: 'USER', variable: 'USER'),
         string(credentialsId: 'PASS', variable: 'PASS'),
         string(credentialsId: 'NAME', variable: 'NAME')]) { 
@@ -64,7 +65,6 @@ node {
 
                 }
             }       
-        }
+        }   */
 }
 
-*/
