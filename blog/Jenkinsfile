@@ -1,19 +1,29 @@
 node { 
-    def app
+//    def app
+    def image = sh "git rev-parse --short HEAD"
+    def host = '192.168.64.3:5000/unoterr1/blog_comp:'
     stage('Checkout code') {
         checkout scm
     }
-    withEnv(['HOST=192.168.64.3:5000/unoterr1/blog_comp:']){
+
+//                export HOST="${env.HOST}"
+//    withEnv(['HOST=192.168.64.3:5000/unoterr1/blog_comp:', 'IMAGE=']){
+
+//                export IMAGE="${env.BUILD_NUMBER}"
+//                envsubst < docker-tmp.yml > docker-compose.yml 
+
+    withEnv(['HOST='+host, 'IMAGE='+image]){
         stage('Build image and push') {
-            sh """
-            export HOST="${env.HOST}"
-            export IMAGE="${env.BUILD_NUMBER}"
-            cd blog && envsubst < docker-tmp.yml > docker-compose.yml 
-            docker-compose build blog
-            docker-compose push blog
-            """.stripIndent()
+            dir('/blog') {
+               sh """
+                docker-compose build blog
+                docker-compose push blog
+                """.stripIndent()
+            }
         }
     }
+
+/*
     stage('Push') {
 //        sh """docker-compose push blog"""
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
@@ -51,4 +61,6 @@ node {
 
         }
     }
+
+*/
 }
