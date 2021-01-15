@@ -26,33 +26,17 @@ spec:
       labels:
         app: blog
     spec:
-      # imagePullSecrets:
-      # - name: azure
       containers:
       - name: blog
         image: jakubnajman/blog_app:$IVER
-        # image: yndblog.azurecr.io/blog_app
-        # imagePullPolicy: Always
         env:
         - name: DATABASE_PASSWORD
-          valueFrom: 
-            secretKeyRef:
-              name: dbsecret
-              key: DATABASE_PASSWORD
+          value: ${DATABASE_PASSWORD}
         - name: DATABASE_USERNAME
-          valueFrom: 
-            secretKeyRef:
-              name: dbsecret
-              key: DATABASE_USERNAME
+          value: ${DATABASE_USERNAME}
         - name: DATABASE_NAME
-          valueFrom: 
-            secretKeyRef:
-              name: dbsecret
-              key: DATABASE_NAME
+          value: ${DATABASE_NAME}
         - name: DATABASE_HOST
-          valueFrom: 
-            secretKeyRef:
-              name: dbsecret
-              key: DATABASE_HOST
+          value: ${DATABASE_HOST}
         ports:
           - containerPort: 3000

@@ -1,0 +1,15 @@
+version: '3'
+services: 
+  blog:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - '3000:3000'
+    tty: true
+    environment: 
+      - PGHOST=${DATABASE_HOST}
+      - PGUSER=${DATABASE_USERNAME}
+      - PGDATABASE=${DATABASE_NAME}
+      - PGPASSWORD=${DATABASE_PASSWORD}
+    image: 'jakubnajman/blog_app:$IVER'
