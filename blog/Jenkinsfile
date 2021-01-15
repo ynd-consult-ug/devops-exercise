@@ -17,10 +17,10 @@ node{
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
+                        // envsubst < docker-compose.yml > docker-composeC.yml
         withEnv(['IVER='+IVER, 'DATABASE_HOST=postgresql-service.default.svc.cluster.local', 'DATABASE_NAME=blog_backend', 'DATABASE_PASSWORD=blog_backend', 'DATABASE_USERNAME=blog_backend']){
             sh """
                 cd blog
-                // envsubst < docker-compose.yml > docker-composeC.yml
                 docker-compose build blog
                 docker-compose push blog
                 """
@@ -51,10 +51,10 @@ node{
         // sh 'export IVER=$(git rev-parse --short HEAD)'
         // sh 'yum install gettext'
         // sh 'docker pull localhost:5000/blog_app:$(git rev-parse --short HEAD)'
+                       // envsubst < blogKube.yaml > blog_changed.yaml
         withEnv(['IVER='+IVER, 'DATABASE_HOST=postgresql-service.default.svc.cluster.local', 'DATABASE_NAME=blog_backend', 'DATABASE_PASSWORD=blog_backend', 'DATABASE_USERNAME=blog_backend']){
             sh """
                 cd blog/kube
-                // envsubst < blogKube.yaml > blog_changed.yaml
                 kubectl apply -f blogKube.yaml
                 """
             sh 'cd blog/kube && kubectl apply -f addit/'
