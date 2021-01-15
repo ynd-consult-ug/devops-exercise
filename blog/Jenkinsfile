@@ -1,11 +1,7 @@
 node { 
-//    def app
-    //def image = sh "git rev-parse --short HEAD"
-    image = sh (
-        script: 'git rev-parse --short HEAD',
-        returnStdout: true
-        ).trim()
-    def host = '192.168.64.3:5000/unoterr1/blog_comp:'
+    image = sh (script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+    host = '192.168.64.3:5000/unoterr1/blog_comp:'
+
     stage('Checkout code') {
         checkout scm
     }
@@ -29,46 +25,33 @@ node {
     }
 /*
     stage('Push') {
-//        sh """docker-compose push blog"""
-//        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
-//        docker.withRegistry('http://localhost:55001/') {        
-//          app.push("${env.BUILD_NUMBER}")   
-//          app.push("latest")        
-//            }    
-        }
-
+        sh """docker-compose push blog"""
+        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
+        docker.withRegistry('http://localhost:55001/') {        
+          app.push("${env.BUILD_NUMBER}")   
+          app.push("latest")        
+            }    
+        }       */
+        
+/*
     withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
         string(credentialsId: 'USER', variable: 'USER'),
         string(credentialsId: 'PASS', variable: 'PASS'),
-        string(credentialsId: 'NAME', variable: 'NAME')]) { 
+        string(credentialsId: 'NAME', variable: 'NAME')]) {         */
 
-        stage('Deploy App') {
-            withEnv(['IMAGE='+image]){
-                dir('blog') {
-//       sh 'minikube start'
-//        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
-//            sh "cd blog && python3 secret.py ${env.NAME} ${env.PASS} ${env.DB} ${env.HOST}" 
-//            sh "cd blog && kubectl apply -f mysecret.yaml"
+    stage('Deploy App') {
+        dir('blog') {
+//        sh "python3 secret.py ${env.NAME} ${env.PASS} ${env.DB} ${env.HOST}" 
+//        sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
 
-//          sh "cd blog && python3 version.py ${env.BUILD_NUMBER}" 
-//          sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
-
-///                       export IMAGE="${env.BUILD_NUMBER}"
-///            cd blog && envsubst < blog.yaml > blog_tmp.yaml
-
-                    sh """
-                    kubectl apply -f blog_tmp.yaml
-                    """.stripIndent()
-
-//       The following section is done manually because db deployment and services
-//       in this case do not need to be recreated everytime because no changes are introduced to them.
-
-//       sh 'cd blog && kubectl apply -f service_db.yaml'
-//       sh 'cd blog && kubectl apply -f service_blog.yaml'
-//       sh 'cd blog && kubectl apply -f db.yaml'
+        sh """
+        export IMAGE="${env.image}"
+        envsubst < blog.yaml > blog_tmp.yaml
+        kubectl apply -f blog_tmp.yaml
+        """.stripIndent()
 
                 }
             }       
-        }   */
+        }   
 }
 
