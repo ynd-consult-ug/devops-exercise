@@ -1,6 +1,10 @@
 node { 
 //    def app
-    def image = sh "git rev-parse --short HEAD"
+    //def image = sh "git rev-parse --short HEAD"
+    image = sh (
+        script: 'git rev-parse --short HEAD',
+        returnStdout: true
+        ).trim()
     def host = '192.168.64.3:5000/unoterr1/blog_comp:'
     stage('Checkout code') {
         checkout scm
