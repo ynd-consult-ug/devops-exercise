@@ -12,8 +12,8 @@ node {
 //                export IMAGE="${env.BUILD_NUMBER}"
 //                envsubst < docker-tmp.yml > docker-compose.yml 
 
-    withEnv(['HOST='+host, 'IMAGE='+image]){
-        stage('Build image and push') {
+    stage('Build image and push') {
+        withEnv(['HOST='+host, 'IMAGE='+image]){
             dir('blog') {
                sh """
                 docker-compose build blog
@@ -23,7 +23,6 @@ node {
         }
     }
 
-/*
     stage('Push') {
 //        sh """docker-compose push blog"""
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
@@ -37,6 +36,7 @@ node {
         string(credentialsId: 'USER', variable: 'USER'),
         string(credentialsId: 'PASS', variable: 'PASS'),
         string(credentialsId: 'NAME', variable: 'NAME')]) {
+            withEnv(['IMAGE='+image]){
             stage('Deploy App') {
 //       sh 'minikube start'
 //        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
@@ -45,7 +45,6 @@ node {
 
 //          sh "cd blog && python3 version.py ${env.BUILD_NUMBER}" 
 //          sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
-
             sh """
             export IMAGE="${env.BUILD_NUMBER}"
             cd blog && envsubst < blog.yaml > blog_tmp.yaml
