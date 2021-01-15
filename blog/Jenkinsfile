@@ -21,7 +21,8 @@ node{
         withEnv(['IVER='+IVER, 'DATABASE_HOST=postgresql-service.default.svc.cluster.local', 'DATABASE_NAME=blog_backend', 'DATABASE_PASSWORD=blog_backend', 'DATABASE_USERNAME=blog_backend']){
             sh """
                 cd blog
-                docker-compose build blog
+                envsubst < docker-compose.yml > docker-composeC.yml
+                docker-compose -f docker-composeC.yml build blog
                 docker-compose push blog
                 """
         }
@@ -55,7 +56,8 @@ node{
         withEnv(['IVER='+IVER, 'DATABASE_HOST=postgresql-service.default.svc.cluster.local', 'DATABASE_NAME=blog_backend', 'DATABASE_PASSWORD=blog_backend', 'DATABASE_USERNAME=blog_backend']){
             sh """
                 cd blog/kube
-                kubectl apply -f blogKube.yaml
+                envsubst < blogKube.yaml > blog_changed.yaml
+                kubectl apply -f blog_changed.yaml
                 """
             sh 'cd blog/kube && kubectl apply -f addit/'
         }
