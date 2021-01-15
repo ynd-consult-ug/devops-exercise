@@ -31,8 +31,7 @@ node{
         withEnv(['IVER='+IVER, 'DATABASE_HOST='+DATABASE_HOST, 'DATABASE_NAME='+DATABASE_NAME, 'DATABASE_PASSWORD='+DATABASE_PASSWORD, 'DATABASE_USERNAME='+DATABASE_USERNAME]){
             sh """
                 cd blog
-                envsubst < docker-compose.yml > docker-composeC.yml
-                docker-compose -f docker-composeC.yml build
+                docker-compose build
                 docker-compose push blog
             """
         }
