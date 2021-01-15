@@ -32,12 +32,14 @@ node {
 //            }    
         }
 
-    withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
+/*    withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
         string(credentialsId: 'USER', variable: 'USER'),
         string(credentialsId: 'PASS', variable: 'PASS'),
-        string(credentialsId: 'NAME', variable: 'NAME')]) {
+        string(credentialsId: 'NAME', variable: 'NAME')]) { */
+
+        stage('Deploy App') {
             withEnv(['IMAGE='+image]){
-            stage('Deploy App') {
+                dir('blog') {
 //       sh 'minikube start'
 //        sh 'eval $(minikube docker-env)' //Configure environment to use minikube’s Docker daemon
 //            sh "cd blog && python3 secret.py ${env.NAME} ${env.PASS} ${env.DB} ${env.HOST}" 
@@ -45,11 +47,13 @@ node {
 
 //          sh "cd blog && python3 version.py ${env.BUILD_NUMBER}" 
 //          sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
-            sh """
-            export IMAGE="${env.BUILD_NUMBER}"
-            cd blog && envsubst < blog.yaml > blog_tmp.yaml
-            kubectl apply -f blog_tmp.yaml
-            """.stripIndent()
+
+///                       export IMAGE="${env.BUILD_NUMBER}"
+///            cd blog && envsubst < blog.yaml > blog_tmp.yaml
+
+                    sh """
+                    kubectl apply -f blog_tmp.yaml
+                    """.stripIndent()
 
 //       The following section is done manually because db deployment and services
 //       in this case do not need to be recreated everytime because no changes are introduced to them.
@@ -58,8 +62,7 @@ node {
 //       sh 'cd blog && kubectl apply -f service_blog.yaml'
 //       sh 'cd blog && kubectl apply -f db.yaml'
 
+                }
+            }       
         }
-    }
-
-*/
 }
