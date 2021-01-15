@@ -1,16 +1,12 @@
 node{
     def IVER = sh (script: "git rev-parse --short HEAD", returnStdout: true)
-    def DATABASE_HOST = "postgresql-service.default.svc.cluster.local"
-    def DATABASE_NAME = "blog_backend"
-    def DATABASE_PASSWORD = "blog_backend"
-    def DATABASE_USERNAME = "blog_backend"
     // def dbenv = new ConfigSlurper().parse("")
-    // environment {
-    //     DATABASE_HOST=credentials('postgresql-service.default.svc.cluster.local')
-    //     DATABASE_NAME=credentials('blog_backend')
-    //     DATABASE_PASSWORD=credentials('blog_backend')
-    //     DATABASE_USERNAME=credentials('blog_backend')
-    // }
+    environment {
+        DATABASE_HOST=credentials('postgresql-service.default.svc.cluster.local')
+        DATABASE_NAME=credentials('blog_backend')
+        DATABASE_PASSWORD=credentials('blog_backend')
+        DATABASE_USERNAME=credentials('blog_backend')
+    }
     // def settingEnv(){
     //     sh """
     //         export IVER=${IVER}
@@ -28,13 +24,16 @@ node{
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
                         // envsubst < docker-compose.yml > docker-composeC.yml
-        withEnv(['IVER='+IVER, 'DATABASE_HOST='+DATABASE_HOST, 'DATABASE_NAME='+DATABASE_NAME, 'DATABASE_PASSWORD='+DATABASE_PASSWORD, 'DATABASE_USERNAME='+DATABASE_USERNAME]){
-            sh """
-                cd blog
-                docker-compose build
-                docker-compose push blog
-            """
-        }
+        sh """
+            cd blog
+            export IVER=${IVER}
+            export DATABASE_HOST=${env.DATABASE_HOST}
+            export DATABASE_NAME=${env.DATABASE_NAME}
+            export DATABASE_PASSWORD=${env.DATABASE_PASSWORD}
+            export DATABASE_USERNAME=${env.DATABASE_USERNAME}
+            docker-compose build
+            docker-compose push blog
+        """
         sh 'echo App builded.'
     }
     // stage('Pushing to local registry'){
@@ -65,10 +64,10 @@ node{
         sh """
             cd blog/kube
             export IVER=${IVER}
-            export DATABASE_HOST=${DATABASE_HOST}
-            export DATABASE_NAME=${DATABASE_NAME}
-            export DATABASE_PASSWORD=${DATABASE_PASSWORD}
-            export DATABASE_USERNAME=${DATABASE_USERNAME}
+            export DATABASE_HOST=${env.DATABASE_HOST}
+            export DATABASE_NAME=${env.DATABASE_NAME}
+            export DATABASE_PASSWORD=${env.DATABASE_PASSWORD}
+            export DATABASE_USERNAME=${env.DATABASE_USERNAME}
             envsubst < blogKube.yaml > blog_changed.yaml
             kubectl apply -f blog_changed.yaml
         """
