@@ -28,17 +28,13 @@ node{
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
                         // envsubst < docker-compose.yml > docker-composeC.yml
-        sh """
-            cd blog
-            export IVER=${IVER}
-            export DATABASE_HOST=${DATABASE_HOST}
-            export DATABASE_NAME=${DATABASE_NAME}
-            export DATABASE_PASSWORD=${DATABASE_PASSWORD}
-            export DATABASE_USERNAME=${DATABASE_USERNAME}
-            envsubst < docker-compose.yml > docker-composeC.yml
-            docker-compose -f docker-composeC.yml build
-            docker-compose push blog
-            """
+        withEnv(['IVER=+'=IVER, 'DATABASE_HOST='+DATABASE_HOST, 'DATABASE_NAME='+DATABASE_NAME, 'DATABASE_PASSWORD='+DATABASE_PASSWORD, 'DATABASE_USERNAME='+DATABASE_USERNAME])
+            sh """
+                cd blog
+                envsubst < docker-compose.yml > docker-composeC.yml
+                docker-compose -f docker-composeC.yml build
+                docker-compose push blog
+                """
         sh 'echo App builded.'
     }
     // stage('Pushing to local registry'){
