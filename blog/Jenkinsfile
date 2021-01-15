@@ -22,7 +22,7 @@ node {
             }
         }
     }
-
+/*
     stage('Push') {
 //        sh """docker-compose push blog"""
 //        docker.withRegistry('https://registry.hub.docker.com/', 'hub') {    
@@ -35,7 +35,7 @@ node {
 /*    withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
         string(credentialsId: 'USER', variable: 'USER'),
         string(credentialsId: 'PASS', variable: 'PASS'),
-        string(credentialsId: 'NAME', variable: 'NAME')]) { */
+        string(credentialsId: 'NAME', variable: 'NAME')]) { 
 
         stage('Deploy App') {
             withEnv(['IMAGE='+image]){
@@ -66,3 +66,5 @@ node {
             }       
         }
 }
+
+*/
