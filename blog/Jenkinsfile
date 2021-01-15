@@ -1,12 +1,16 @@
 node{
     def IVER = sh (script: "git rev-parse --short HEAD", returnStdout: true)
+    def DATABASE_HOST='postgresql-service.default.svc.cluster.local'
+    def DATABASE_NAME='blog_backend'
+    def DATABASE_PASSWORD='blog_backend'
+    def DATABASE_USERNAME='blog_backend'
     // def dbenv = new ConfigSlurper().parse("")
-    environment {
-        DATABASE_HOST=credentials('postgresql-service.default.svc.cluster.local')
-        DATABASE_NAME=credentials('blog_backend')
-        DATABASE_PASSWORD=credentials('blog_backend')
-        DATABASE_USERNAME=credentials('blog_backend')
-    }
+    // environment {
+    //     DATABASE_HOST=credentials('postgresql-service.default.svc.cluster.local')
+    //     DATABASE_NAME=credentials('blog_backend')
+    //     DATABASE_PASSWORD=credentials('blog_backend')
+    //     DATABASE_USERNAME=credentials('blog_backend')
+    // }
     // def settingEnv(){
     //     sh """
     //         export IVER=${IVER}
@@ -27,10 +31,10 @@ node{
         sh """
             cd blog
             export IVER=${IVER}
-            export DATABASE_HOST=${env.DATABASE_HOST}
-            export DATABASE_NAME=${env.DATABASE_NAME}
-            export DATABASE_PASSWORD=${env.DATABASE_PASSWORD}
-            export DATABASE_USERNAME=${env.DATABASE_USERNAME}
+            export DATABASE_HOST=${DATABASE_HOST}
+            export DATABASE_NAME=${DATABASE_NAME}
+            export DATABASE_PASSWORD=${DATABASE_PASSWORD}
+            export DATABASE_USERNAME=${DATABASE_USERNAME}
             docker-compose build
             docker-compose push blog
         """
@@ -64,10 +68,10 @@ node{
         sh """
             cd blog/kube
             export IVER=${IVER}
-            export DATABASE_HOST=${env.DATABASE_HOST}
-            export DATABASE_NAME=${env.DATABASE_NAME}
-            export DATABASE_PASSWORD=${env.DATABASE_PASSWORD}
-            export DATABASE_USERNAME=${env.DATABASE_USERNAME}
+            export DATABASE_HOST=${DATABASE_HOST}
+            export DATABASE_NAME=${DATABASE_NAME}
+            export DATABASE_PASSWORD=${DATABASE_PASSWORD}
+            export DATABASE_USERNAME=${DATABASE_USERNAME}
             envsubst < blogKube.yaml > blog_changed.yaml
             kubectl apply -f blog_changed.yaml
         """
