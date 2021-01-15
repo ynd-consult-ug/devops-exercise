@@ -16,7 +16,7 @@ node{
         sh """
             cd blog && export IVER=${IVER} 
             envsubst < docker-compose.yml > docker-composeC.yml
-            docker-compose -f docker-composeC.yml build
+            docker-compose -f docker-composeC.yml build &&
             docker-compose push blog'
             """
         sh 'echo App builded.'
