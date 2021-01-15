@@ -5,10 +5,6 @@ node {
     stage('Checkout code') {
         checkout scm
     }
-
-//                export HOST="${env.HOST}"
-//    withEnv(['HOST=192.168.64.3:5000/unoterr1/blog_comp:', 'IMAGE=']){
-
 //                export IMAGE="${env.BUILD_NUMBER}"
 //                envsubst < docker-tmp.yml > docker-compose.yml 
 
@@ -31,24 +27,22 @@ node {
           app.push("${env.BUILD_NUMBER}")   
           app.push("latest")        
             }    
-        }       */
+        } 
         
-/*
-    withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
+        withCredentials([string(credentialsId: 'HOST', variable: 'HOST'),
         string(credentialsId: 'USER', variable: 'USER'),
         string(credentialsId: 'PASS', variable: 'PASS'),
         string(credentialsId: 'NAME', variable: 'NAME')]) {         */
 
     stage('Deploy App') {
-        dir('blog') {
+        withEnv(['IMAGE='+image]){
+            dir('blog') {
 //        sh "python3 secret.py ${env.NAME} ${env.PASS} ${env.DB} ${env.HOST}" 
 //        sh 'cd blog && kubectl patch deployment blog --patch "$(cat patch.yaml)"'
-
-        sh """
-        export IMAGE="${env.image}"
-        envsubst < blog.yaml > blog_tmp.yaml
-        kubectl apply -f blog_tmp.yaml
-        """.stripIndent()
+                sh """
+                envsubst < blog.yaml > blog_tmp.yaml
+                kubectl apply -f blog_tmp.yaml
+                """.stripIndent()
 
                 }
             }       
