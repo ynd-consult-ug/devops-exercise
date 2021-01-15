@@ -16,7 +16,7 @@ node {
         withEnv(['HOST='+host, 'IMAGE='+image]){
             dir('blog') {
                sh """
-                echo ${image}
+                echo ${IMAGE}
                 docker-compose build blog
                 docker-compose push blog
                 """.stripIndent()
