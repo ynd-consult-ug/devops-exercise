@@ -17,7 +17,7 @@ node{
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
-        withEnv(['IVER='+IVER, DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USERNAME]){
+        withEnv(['IVER='+IVER, 'DATABASE_HOST='+DATABASE_HOST, 'DATABASE_NAME='+DATABASE_NAME, 'DATABASE_PASSWORD='+DATABASE_PASSWORD, 'DATABASE_USERNAME='+DATABASE_USERNAME]){
             sh """
                 cd blog
                 envsubst < docker-compose.yml > docker-composeC.yml
@@ -51,7 +51,7 @@ node{
         // sh 'export IVER=$(git rev-parse --short HEAD)'
         // sh 'yum install gettext'
         // sh 'docker pull localhost:5000/blog_app:$(git rev-parse --short HEAD)'
-        withEnv(['IVER='+IVER, DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USERNAME]){
+        withEnv(['IVER='+IVER, 'DATABASE_HOST='+DATABASE_HOST, 'DATABASE_NAME='+DATABASE_NAME, 'DATABASE_PASSWORD='+DATABASE_PASSWORD, 'DATABASE_USERNAME+'=DATABASE_USERNAME]){
             sh """
                 cd blog/kube
                 envsubst < blogKube.yaml > blog_changed.yaml
