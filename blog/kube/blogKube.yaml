@@ -29,14 +29,35 @@ spec:
       containers:
       - name: blog
         image: jakubnajman/blog_app:$IVER
+        # env:
+        # - name: DATABASE_PASSWORD
+        #   value: $DATABASE_PASSWORD
+        # - name: DATABASE_USERNAME
+        #   value: $DATABASE_USERNAME
+        # - name: DATABASE_NAME
+        #   value: $DATABASE_NAME
+        # - name: DATABASE_HOST
+        #   value: $DATABASE_HOST
         env:
-        - name: DATABASE_PASSWORD
-          value: $DATABASE_PASSWORD
-        - name: DATABASE_USERNAME
-          value: $DATABASE_USERNAME
-        - name: DATABASE_NAME
-          value: $DATABASE_NAME
-        - name: DATABASE_HOST
-          value: $DATABASE_HOST
+        -  name: DATABASE_HOST
+           valueFrom:
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_HOST
+        -  name: DATABASE_NAME
+           valueFrom:
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_NAME
+        -  name: DATABASE_PASSWORD
+           valueFrom:
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_PASSWORD
+        -  name: DATABASE_USERNAME
+           valueFrom:
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_USERNAME 
         ports:
           - containerPort: 3000
