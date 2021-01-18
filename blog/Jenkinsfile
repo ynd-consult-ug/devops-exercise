@@ -1,9 +1,5 @@
 node{
     def IVER = sh (script: "git log --pretty=format:'%h' -n 1", returnStdout: true)
-    def DATABASE_HOST='postgresql-service.default.svc.cluster.local'
-    def DATABASE_NAME='blog_backend'
-    def DATABASE_PASSWORD='blog_backend'
-    def DATABASE_USERNAME='blog_backend'
     stage('Clone repository'){
         checkout scm
         sh 'echo Repository cloned'
@@ -24,10 +20,6 @@ node{
         withEnv(['IVER='+IVER]){
            dir('blog/kube'){
            sh """
-            export DATABASE_HOST=${DATABASE_HOST}
-            export DATABASE_NAME=${DATABASE_NAME}
-            export DATABASE_PASSWORD=${DATABASE_PASSWORD}
-            export DATABASE_USERNAME=${DATABASE_USERNAME}
             envsubst < blogKube.yaml > blog_changed.yaml
             kubectl apply -f blog_changed.yaml
             """ 
